@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Lists Key="Configuration">
+  <List Key="Configuration">
+ 
+    <Item Name="Connnection_DB" Value ="Server=.;Database=MCC_PRODB;Trusted_Connection=True;"></Item> 
+  
+    <Item	Name="IsDirectorylocal"					   Value="true" /> 
+    <Item Name="IsLOG"                       Value="false" />  
+
+    <Item Name="PRWEBDirectoryLocal" Value="http://localhost:7902" />
+    <Item Name="PRWEBDirectoryl" Value="https://pys.perakenderehberi.net" /> 
+    
+    
+    <Item	Name="IsImgPathlocal"					   Value="true" /> 
+    <Item Name="ImagesPath"        Value ="http://localhost:53925"></Item>  
+    <Item Name="ImagesPathlocal"        Value ="http://localhost:53925"></Item> 
+  
+        
+    <Item Name="ProductImgMaxWidth"  Value ="400"></Item> 
+    <Item Name="ProductImgMaxHeight"  Value ="400"></Item>  
+      
+    <Item Name="DefaultProfileImage" Value ="/Dokumanlar/Sistem/Imajlar/profil.jpg"></Item>   
+ 
+    <Item Name="UploadDirectory"               Value ="C:\GitHub\PRProject\PRWebSiteNew"></Item>  
+    <Item Name="UploadDirectoryFolder"   Value ="\Dokumanlar\"></Item>
+  
+    <Item Name="CommandTimeout"                Value="18000" />  
+    
+
+  </List>
+</Lists>
