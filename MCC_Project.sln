@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{B2EF9A7D-8910-4AD4-807A-39BC62055034}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log_Layer", "Log_Layer\Log_Layer.csproj", "{28346BE3-223F-41DA-BDAB-9F8C9A5E933D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel", "AdminPanel\AdminPanel.csproj", "{21A50C8E-781B-440C-91DE-704177E665AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{B2EF9A7D-8910-4AD4-807A-39BC62055034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2EF9A7D-8910-4AD4-807A-39BC62055034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2EF9A7D-8910-4AD4-807A-39BC62055034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28346BE3-223F-41DA-BDAB-9F8C9A5E933D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28346BE3-223F-41DA-BDAB-9F8C9A5E933D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28346BE3-223F-41DA-BDAB-9F8C9A5E933D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28346BE3-223F-41DA-BDAB-9F8C9A5E933D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A50C8E-781B-440C-91DE-704177E665AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A50C8E-781B-440C-91DE-704177E665AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A50C8E-781B-440C-91DE-704177E665AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A50C8E-781B-440C-91DE-704177E665AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

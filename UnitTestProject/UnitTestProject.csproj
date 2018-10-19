@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogLayer_Test.cs" />
     <Compile Include="ObjectLayer_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Log_Layer\Log_Layer.csproj">
+      <Project>{28346be3-223f-41da-bdab-9f8c9a5e933d}</Project>
+      <Name>Log_Layer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Object_Layer\Object_Layer.csproj">
       <Project>{fdc24b27-f48f-4b3e-87c4-87c2f0800615}</Project>
       <Name>Object_Layer</Name>

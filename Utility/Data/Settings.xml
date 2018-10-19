@@ -7,9 +7,12 @@
     <Item	Name="IsDirectorylocal"					   Value="true" /> 
     <Item Name="IsLOG"                       Value="false" />  
 
-    <Item Name="PRWEBDirectoryLocal" Value="http://localhost:7902" />
-    <Item Name="PRWEBDirectoryl" Value="https://pys.perakenderehberi.net" /> 
+    <Item Name="WEBDirectoryLocal" Value="http://localhost:7902" />
+    <Item Name="WEBDirectory" Value="https://www.web.net" /> 
     
+
+    <Item Name="AdminDirectoryLocal" Value="http://localhost:59091" />
+    <Item Name="AdminDirectory" Value="https://www.Admin.net" /> 
     
     <Item	Name="IsImgPathlocal"					   Value="true" /> 
     <Item Name="ImagesPath"        Value ="http://localhost:53925"></Item>  

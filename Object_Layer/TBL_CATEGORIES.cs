@@ -1,4 +1,4 @@
-﻿using Data_Access_Layer.AbstractFactory;
+﻿using Data_Access_Layer.Manager;
 using Data_Access_Layer.Common;
 using System;
 using System.Collections.Generic;
@@ -34,11 +34,13 @@ namespace Object_Layer
 			return _dbEntityManager.Update<TBL_CATEGORIES>(ObjectList, sp_UPDATE, PrimaryKeyName);
 		}
 
-		public static List<TBL_CATEGORIES> LIST(int? ID = null, int? CREATEUSERID = null)
+		public static List<TBL_CATEGORIES> LIST(int? ID = null, int? CREATEUSERID = null, bool? ISACTIVE = null, bool? ISPRODUCTCOUNT = null)
 		{
 			SqlParameter[] Param = {
 									new SqlParameter("@ID", ID),
-									new SqlParameter("@CREATEUSERID", CREATEUSERID)
+									new SqlParameter("@CREATEUSERID", CREATEUSERID)    ,
+									new SqlParameter("@ISACTIVE", ISACTIVE),
+									new SqlParameter("@ISPRODUCTCOUNT", ISPRODUCTCOUNT)
 			};
 			return _dbEntityManager.ListParam<TBL_CATEGORIES>(sp_LIST, Param);
 		}
@@ -50,11 +52,23 @@ namespace Object_Layer
 		[DBField("CATEGORYNAME")]
 		public string CATEGORYNAME { get; set; }
 
+		[DBField("ISACTIVE")]
+		public bool ISACTIVE { get; set; }
+
+		[DBField("ISDELETE")]
+		public bool ISDELETE { get; set; }
+
 		[DBField("CREATEDATE")]
 		public DateTime CREATEDATE { get; set; }
 
 		[DBField("CREATEUSERID")]
-		public int CREATEUSERID { get; set; }
+		public int CREATEUSERID { get; set; }	   
+
+		[DBField("PRODUCTCOUNT",0)]
+		public int PRODUCTCOUNT { get; set; }	     
+
+		[DBField("CREATEUSERNAME", 0)]
+		public string CREATEUSERNAME { get; set; }
 
 	}
 }

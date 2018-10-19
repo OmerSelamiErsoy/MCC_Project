@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Data_Access_Layer.Common;
+using Log_Layer.Manager;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -94,14 +95,10 @@ namespace Data_Access_Layer.Dapper_Entity
 			}
 			catch (Exception ex)
 			{
-				//LOGLAMA
+				LogManager.LogManagerStatic().LogError(ex.Message);
 			}
 
-			if (bSuccess)
-			{
-				//string ProcName = IsInserting ? "Insert" : "Update";
-				//LOGLAMA
-			}
+ 
 			return bSuccess;
 		}
 
@@ -125,7 +122,7 @@ namespace Data_Access_Layer.Dapper_Entity
 			}
 			catch (Exception ex)
 			{
-			  //LOGLAMA
+				LogManager.LogManagerStatic().LogError(ex.Message);
 			}
 			return arrResults;
 		}
@@ -160,7 +157,7 @@ namespace Data_Access_Layer.Dapper_Entity
 			}
 			catch (Exception ex)
 			{
-				//LOGLAMA
+				LogManager.LogManagerStatic().LogError(ex.Message);
 			}
 			return arrResults;
 		}
@@ -218,7 +215,7 @@ namespace Data_Access_Layer.Dapper_Entity
 			}
 			catch (Exception ex)
 			{
-				//LOGLAMA
+				LogManager.LogManagerStatic().LogError(ex.Message);
 			}
 
 

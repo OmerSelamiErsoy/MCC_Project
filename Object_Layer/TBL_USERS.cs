@@ -1,4 +1,4 @@
-﻿using Data_Access_Layer.AbstractFactory;
+﻿using Data_Access_Layer.Manager;
 using Data_Access_Layer.Common;
 using System;
 using System.Collections.Generic;
@@ -34,18 +34,30 @@ namespace Object_Layer
 			return _dbEntityManager.Update<TBL_USERS>(ObjectList, sp_UPDATE, PrimaryKeyName);
 		}
 
-		public static List<TBL_USERS> LIST(int? ID = null, int? CREATEUSERID = null)
+		public static List<TBL_USERS> LIST(int? ID = null, string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null, bool ISACTIVE = true)
 		{
 			SqlParameter[] Param = {
 									new SqlParameter("@ID", ID),
-									new SqlParameter("@CREATEUSERID", CREATEUSERID)
+									new SqlParameter("@EMAIL", EMAIL) ,
+									new SqlParameter("@PASSWORD", PASSWORD)   ,
+									new SqlParameter("@ISEXECUTIVE", ISEXECUTIVE)   ,
+									new SqlParameter("@ISACTIVE", ISACTIVE)
 			};
 			return _dbEntityManager.ListParam<TBL_USERS>(sp_LIST, Param);
 		}
 
+		public static TBL_USERS LIST_LOGIN( string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null)
+		{
+			var result = LIST(EMAIL: EMAIL, PASSWORD: PASSWORD, ISEXECUTIVE: ISEXECUTIVE);
+			if (result == null || result.Count == 0)
+				return null;
+			else
+				return result[0];
+		}
+
 
 		[DBField("ID", true)]
-		public int ID { get; set; }
+		public int ID { get; set; }	    
 
 		[DBField("FULLNAME")]
 		public string FULLNAME { get; set; }

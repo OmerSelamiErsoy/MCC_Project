@@ -13,17 +13,27 @@ namespace Utility.Methods
 	public sealed class ConfigManager
 	{
 
-		public static string PRWEBDirectory
+		public static string WEBDirectory
 		{
 			get
 			{
 				if (IsDirectorylocal)
-					return GetString("PRWEBDirectoryLocal");
+					return GetString("WEBDirectoryLocal");
 				else
-					return GetString("PRWEBDirectory");
+					return GetString("WEBDirectory");
 			}
 		}
 
+		public static string AdminDirectory
+		{
+			get
+			{
+				if (IsDirectorylocal)
+					return GetString("AdminDirectoryLocal");
+				else
+					return GetString("AdminDirectory");
+			}
+		}
 
 		public static string ConnectionString
 		{

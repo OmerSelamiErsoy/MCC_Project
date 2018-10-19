@@ -46,13 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractFactory\DBEntityManager.cs" />
+    <Compile Include="Manager\DBEntityManager.cs" />
     <Compile Include="Common\DBEntity.cs" />
     <Compile Include="Common\DBFieldAttribute.cs" />
     <Compile Include="Dapper_Entity\DapperDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Log_Layer\Log_Layer.csproj">
+      <Project>{28346be3-223f-41da-bdab-9f8c9a5e933d}</Project>
+      <Name>Log_Layer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{29a76274-a7a6-4223-aeec-cafc3a6d2725}</Project>
       <Name>Utility</Name>
