@@ -69,9 +69,12 @@ namespace Data_Access_Layer.Dapper_Entity
 								if (!(IsInserting && (oAttribute.IsPrimaryKey || oInfo.Name == PrimaryKey)))
 								{
 									objPropertyValue = oInfo.GetValue(EntityInstance, null);
-									if (objPropertyValue == null || DateTime.MinValue.Equals(objPropertyValue))
-										spPARAM.Add("@" + oAttribute.ColumnName, DBNull.Value);
-									else
+									//if (objPropertyValue == null || DateTime.MinValue.Equals(objPropertyValue))
+									//	spPARAM.Add("@" + oAttribute.ColumnName, DBNull.Value);
+									//else
+									//	spPARAM.Add("@" + oAttribute.ColumnName, objPropertyValue);
+
+									if (objPropertyValue != null && !DateTime.MinValue.Equals(objPropertyValue))
 										spPARAM.Add("@" + oAttribute.ColumnName, objPropertyValue);
 								}
 								else

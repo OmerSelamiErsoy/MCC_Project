@@ -1,0 +1,338 @@
+﻿@using Utility.Methods
+@model AdminPanel.Models.Category.CategoryViewModel
+
+@{
+	ViewBag.Title = "Kategori İşlemleri";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{string addCatDisplay = "none";}
+@if (Model.ISPROCCESS)
+{
+
+	if (Model.ISSUCCESSFUL)
+	{
+		<div class="alert alert-success m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+			<strong>Tebrikler!</strong> @Model.MESSAGE
+		</div>
+	}
+	else
+	{
+		addCatDisplay = "block";
+		<div class="alert alert-danger m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+			<strong>Dikkat!</strong> @Model.ERROR_MESSAGE
+		</div>
+	}
+
+}
+
+
+
+<div class="row m-b-20" id="divNewCategory" style="display:@addCatDisplay">
+	<div class="col-12">
+		<div class="row justify-content-center">
+
+			<div class="col-12 col-sm-6 ">
+				<div class="card bg-secondary shadow">
+					<div class="card-header bg-white border-0">
+						<div class="row align-items-center">
+							<div class="col-8">
+								<h3 class="mb-0">Kategori <span id="divProccessTitle">Ekle</span></h3>
+							</div>
+							<div class="col-4 text-right">
+								<a href="#" id="close" class="btn btn-sm btn-danger">Kapat</a>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						@using (Html.BeginForm("CategoryList", "Category", FormMethod.Post, new { id = "formAdd" }))
+						{
+
+							<input type="hidden" name="UPDATEID" id="UPDATEID" value="1" />
+							<div class="pl-lg-4 p-l-0">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label class="form-control-label" for="input-username">Kategori Adı</label>
+											<input type="text" id="CATEGORYNAME" name="CATEGORYNAME" class="form-control form-control-alternative" placeholder="Kategori Adı Giriniz" value="">
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="custom-control custom-control-alternative custom-checkbox">
+											@Html.CheckBox("ISACTIVE", Model.ISACTIVE, new { @class = "custom-control-input", id = "ISACTIVE" })
+											<label class="custom-control-label" for="ISACTIVE">
+												<span class="text-muted">AKTİF</span>
+											</label>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<hr class="my-4" />
+							<!-- Description -->
+							<div class="pl-lg-4">
+								<div class="form-group text-center m-b-0">
+									@OSEHtmlControl.myButton("btnAddCategory", "button", "KAYDET", Enumeration.myButtonType.SUCCESS)
+								</div>
+							</div>
+						}
+
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+	</div>
+
+</div>
+<div class="row">
+	<div class="col">
+		<div class="card shadow">
+			<div class="row align-items-center padding-10">
+				<div class="col-8">
+					<h3 class="mb-0">Kategori Listesi</h3>
+				</div>
+				<div class="col-4 text-right">
+					<a href="#" id="btnnew" class="btn btn-sm btn-primary">Yeni Ekle</a>
+				</div>
+			</div>
+			<div>
+				@if (Model.List_CATEGORIES.Count > 0)
+				{
+
+
+
+					<div class="table-responsive">
+
+						<table class="table align-items-center table-flush">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Kategori Adı</th>
+									<th scope="col" class="text-center">Ürün Sayısı</th>
+									<th scope="col" class="text-center">Durumu</th>
+									<th scope="col" class="text-center">Ekleyen</th>
+									<th scope="col" class="text-center"></th>
+								</tr>
+							</thead>
+							<tbody>
+
+								@for (int i = 0; i < Model.List_CATEGORIES.Count(); i++)
+								{
+									<tr id="tr_@Model.List_CATEGORIES[i].ID">
+										<th scope="row">
+
+											<span class="mb-0 text-sm" id="CATEGORYNAME_@Model.List_CATEGORIES[i].ID">@Model.List_CATEGORIES[i].CATEGORYNAME</span>
+
+										</th>
+										<td class="text-center">
+											@Model.List_CATEGORIES[i].PRODUCTCOUNT
+										</td>
+										<td class="text-center">
+
+											@if (Model.List_CATEGORIES[i].ISACTIVE)
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-success"></i> Aktif
+												</span>
+											}
+											else
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-warning"></i> Pasif
+												</span>
+											}
+
+											<input type="hidden" id="ISACTIVE_@Model.List_CATEGORIES[i].ID" value="@Model.List_CATEGORIES[i].ISACTIVE" />
+
+										</td>
+										<td class="text-center">
+											@Model.List_CATEGORIES[i].CREATEUSERNAME
+										</td>
+										<td class="text-right"> 
+											<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_CATEGORIES[i].ID)">SİL</button>
+											<button type="button" class="btn btn-warning btn-sm" onclick="UPDATE(@Model.List_CATEGORIES[i].ID)">GÜNCELLE</button>
+										</td>
+									</tr>
+								}
+
+
+							</tbody>
+						</table>
+
+					</div>
+					@*<div class="card-footer py-4">
+						<nav aria-label="...">
+							<ul class="pagination justify-content-end mb-0">
+								<li class="page-item disabled">
+									<a class="page-link" href="#" tabindex="-1">
+										<i class="fas fa-angle-left"></i>
+										<span class="sr-only">Previous</span>
+									</a>
+								</li>
+								<li class="page-item active">
+									<a class="page-link" href="#">1</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+									<a class="page-link" href="#">
+										<i class="fas fa-angle-right"></i>
+										<span class="sr-only">Next</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>*@
+
+
+
+				}
+				else
+				{
+					<div class="alert alert-default m-l-10 m-r-10 m-t-10 m-b-20" role="alert">
+						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir kategori bulunmuyor! Lütfen Ekleyiniz.
+					</div>
+				}
+
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+@section FooterBottom
+	{
+
+
+	<script>
+
+		$("#btnAddCategory").click(function () {
+
+			var _CategoryName = $("#CATEGORYNAME").val();
+
+			if (_CategoryName == '') {
+				alertDikkat("Lütfen Kategori Adı Belirtiniz!")
+				return;
+			}
+
+
+			$.confirm({
+				title: 'DİKKAT!',
+				content: 'İşlemi Yapmak İstediğinize Emin Misiniz?',
+				buttons: {
+					EVET: {
+						btnClass: 'btn-green',
+						action: function () {
+
+
+							$("#formAdd").submit();
+
+
+
+						}
+					},
+					HAYIR: {
+						btnClass: 'btn-red',
+						action: function () {
+							//$.alert('Canceled!');
+						}
+					}
+				}
+			});
+
+		});
+
+		$("#close").click(function () {
+			$("#divNewCategory").slideUp("slow", function () { });
+			$("#Divresult").hide();
+		});
+
+		$("#btnnew").click(function () {
+			$("#divNewCategory").slideDown("slow", function () { });
+			$("#Divresult").hide();
+			$('#UPDATEID').val('0')
+			$('#CATEGORYNAME').val('')   
+			$('#ISACTIVE').prop('checked', true);
+			$('#divProccessTitle').text("Ekle")
+		});
+
+		function UPDATE(ID)
+		{
+			$("#Divresult").hide();
+			var _CategoryName = $("#CATEGORYNAME_" + ID).text();
+			var _IsActive = $("#ISACTIVE_" + ID).val();
+			if (_IsActive) {
+				$('#ISACTIVE').prop('checked', true);
+			}
+			else {
+				$('#ISACTIVE').prop('checked', false);
+			}
+			$("#divNewCategory").slideDown("slow", function () { });
+			$('#CATEGORYNAME').val(_CategoryName) 
+			$('#UPDATEID').val(ID)
+			$('#divProccessTitle').text("Güncelle")
+		}
+
+
+		function DELETE(ID) {
+
+			var _CategoryName = $("#CATEGORYNAME_" + ID).text();
+			$.confirm({
+				title: 'DİKKAT!',
+				content: _CategoryName + ' Kategorisini SİLMEK istediğinize emin misiniz?',
+				buttons: {
+					EVET: {
+						btnClass: 'btn-green',
+						action: function () {
+							$("#Divresult").hide();
+
+
+							try {
+								$.ajax({
+									url: "/Category/CategoryDelete",
+									data: {
+										ID: ID
+									},
+									type: 'POST',
+									dataType: 'json', 
+									success: function (data) { 
+										if (data.ISSUCCESSFUL) { 
+											$('#tr_' + ID).remove();
+											alertDikkat(_CategoryName + " Kategorisi Silinmiştir.");
+										}
+										else {
+											alertDikkat(data.ERROR_MESSAGE);
+										} 
+									} 
+								});
+							}
+							catch (e) {
+								alertDikkat("Beklenmeyen Hata! <br/>"+e.description); 
+							}
+
+
+						}
+					},
+					HAYIR: {
+						btnClass: 'btn-red',
+						action: function () {
+							//$.alert('Canceled!');
+						}
+					}
+				}
+			});
+
+		}
+
+	</script>
+
+}

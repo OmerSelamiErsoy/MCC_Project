@@ -69,7 +69,10 @@ namespace Object_Layer
 		public double TAX { get; set; }
 
 		[DBField("CATEGORYID")]
-		public int CATEGORYID { get; set; }
+		public int CATEGORYID { get; set; }	   
+
+		[DBField("CATEGORYNAME",0)]
+		public string CATEGORYNAME { get; set; }
 
 		[DBField("ISACTIVE")]
 		public bool ISACTIVE { get; set; }
@@ -78,16 +81,19 @@ namespace Object_Layer
 		public bool ISDELETE { get; set; }
 
 		[DBField("CREATEDATE")]
-		public DateTime CREATEDATE { get; set; }
+		public DateTime? CREATEDATE { get; set; }
 
 		[DBField("CREATEUSERID")]
 		public int CREATEUSERID { get; set; }
 
+		[DBField("CREATEUSERNAME", 0)]
+		public string CREATEUSERNAME { get; set; }
+
 		[DBField("LASTCHANGEDATE")]
-		public DateTime LASTCHANGEDATE { get; set; }
+		public DateTime? LASTCHANGEDATE { get; set; }
 
 		[DBField("LASTCHANGEUSERID")]
-		public int LASTCHANGEUSERID { get; set; }
+		public int? LASTCHANGEUSERID { get; set; }
 
 		// Burada attribute vermedik çünki bu kolon db'de bulunmuyor. Veri tabanından direk şekilde herhangi bir insert update delete list işlemine katılmıyor.
 		public string PHOTODISPLAY { get { return ConfigManager.ImagesPath + PHOTOADDRESS; }  }

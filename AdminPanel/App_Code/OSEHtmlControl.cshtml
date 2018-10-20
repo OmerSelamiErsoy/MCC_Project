@@ -1,6 +1,8 @@
 ﻿@using Utility.Methods
 
- 
+
+@*Common klasörünün içerisinde "OSECodeControl" altında kendi kontrolümüzü bir başka şekilde ekledik*@
+
 
 @helper myButton(string id = "", string type = "submit", string text = "", Enumeration.myButtonType color = Enumeration.myButtonType.PRIMARY, string additionalClass = "", string icon = "")
 {
@@ -36,4 +38,15 @@
 		}
 		@text
 	</button>
+}
+
+
+
+
+@helper myFileUpload(string id = "fl1", string Title = "Yeni Resim Yükle")
+{
+	<span class="btn btn-default ">
+		@*//btn-file*@
+		<i class="ni ni-cloud-upload-96"></i> @Title <input type="file" id="@id" name="@id" />
+	</span>
 }

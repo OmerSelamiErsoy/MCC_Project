@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace Utility.Methods
 {
-	public class MethodBase
+	public static class MethodBase
 	{
 
 		/// <summary>
@@ -103,6 +103,106 @@ namespace Utility.Methods
 					Document = (XmlDocument)oCache[FilePath];
 			}
 			return Document;
+		}
+
+		public static Int32 ToInt32(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return 0;
+
+			try
+			{
+				return Convert.ToInt32(str);
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
+		public static Int32? ToInt32Null(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return null;
+
+			try
+			{
+				return Convert.ToInt32(str);
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static DateTime ToDateTime(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return DateTime.Now;
+
+			try
+			{
+				return Convert.ToDateTime(str);
+			}
+			catch (Exception)
+			{
+				return DateTime.Now;
+			}
+		}
+
+		public static decimal ToDecimal(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return 0;
+
+			try
+			{
+				return Convert.ToDecimal(String.Format("{0:N2}", str));
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
+
+		public static double ToDouble(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return 0;
+
+			try
+			{
+				return Convert.ToDouble(String.Format("{0:N2}", str.ToString().Replace(".", "")));
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
+		public static string CreateUniqPassword(int StepCount = 6)
+		{
+			int iMinCount = 0, iMaxCount = 0;
+			string sMinCount = "", sMaxCount = "";
+			for (int i = 0; i < StepCount; i++)
+			{
+				sMinCount += "1"; sMaxCount += "9";
+			}
+			iMinCount = Convert.ToInt32(sMinCount);
+			iMaxCount = Convert.ToInt32(sMaxCount);
+
+			int rndNumber = Random(iMinCount, iMaxCount);
+
+			return rndNumber.ToString();
+		}
+
+		private static Random random;
+		private static void RandomInit()
+		{
+			if (random == null) random = new Random();
+		}
+		public static int Random(int min, int max)
+		{
+			RandomInit();
+			return random.Next(min, max);
 		}
 
 	}

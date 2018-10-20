@@ -1211,7 +1211,7 @@ var jconfirm, Jconfirm;
         '<div class="jconfirm-box" role="dialog" aria-labelledby="labelled" tabindex="-1">' +
         '<div class="jconfirm-closeIcon">&times;</div>' +
         '<div class="jconfirm-title-c">' +
-        '<span class="jconfirm-icon-c"></span>' +
+        //'<span class="jconfirm-icon-c"></span>' +
         '<span class="jconfirm-title"></span>' +
         '</div>' +
         '<div class="jconfirm-content-pane">' +

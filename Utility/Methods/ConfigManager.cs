@@ -60,12 +60,19 @@ namespace Utility.Methods
 				return GetBool("IsLOG");
 			}
 		}
-																   
+
 		public static bool IsImgPathlocal
 		{
 			get
 			{
 				return GetBool("IsImgPathlocal");
+			}
+		}
+		public static string DefaultProductImage
+		{
+			get
+			{
+				return GetString("DefaultProductImage");
 			}
 		}
 

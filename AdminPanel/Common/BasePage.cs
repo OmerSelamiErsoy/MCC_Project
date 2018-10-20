@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
+using Utility.Methods;  
 
 namespace AdminPanel.Common
 {
@@ -76,6 +78,59 @@ namespace AdminPanel.Common
 
 		}
 
+
+		public static string ImgUpload(WebImage img, string UploadDirectory, string UploadFolder, string defaultName = "foto", int? MaxWidth = null, int? MaxHeight = null)
+		{
+			string CurrentImgPath = "";
+			int _MaxWidth = 0;
+			int _MaxHeight = 0;
+			if (MaxWidth != null && MaxHeight != null)
+			{
+				_MaxWidth = MaxWidth.ToInt32();
+				_MaxHeight = MaxHeight.ToInt32();
+			}
+			else
+			{
+				_MaxWidth = ConfigManager.ProductImgMaxWidth;
+				_MaxHeight = ConfigManager.ProductImgMaxHeight;
+			}
+
+
+			if (img.Height > _MaxHeight || img.Width > _MaxWidth)
+			{
+				int Width = 0;
+				int Height = 0;
+
+				if (img.Width > img.Height)
+				{
+					Height = img.Height * (int)_MaxWidth / img.Width;
+					Width = _MaxWidth;
+
+				}
+				else if (img.Width < img.Height)
+				{
+					Width = img.Width * (int)_MaxHeight / img.Height;
+					Height = _MaxHeight;
+
+				}
+				else
+				{
+					Width = _MaxWidth;
+					Height = _MaxWidth;
+				}
+
+				img.Resize(Width, Height);
+			}
+			string RondomCode = MethodBase.CreateUniqPassword(5);
+			string filename = defaultName + $"_{RondomCode}.{img.ImageFormat}";
+			if (!System.IO.Directory.Exists($"{UploadDirectory}/{UploadFolder}"))
+				System.IO.Directory.CreateDirectory($"{UploadDirectory}/{UploadFolder}");
+
+			img.Save($"{UploadDirectory}/{UploadFolder}/{filename}");
+			CurrentImgPath = $"{UploadFolder.Replace(@"\", "/")}{filename}";
+
+			return CurrentImgPath;
+		}
 	}
 
 }

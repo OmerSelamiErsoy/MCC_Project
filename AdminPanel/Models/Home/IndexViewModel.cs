@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AdminPanel.Models.Home
 {
-	public class IndexViewModel
+	public class IndexViewModel	  
 	{
 
 	}

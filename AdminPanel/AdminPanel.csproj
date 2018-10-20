@@ -1787,24 +1787,32 @@
     <Content Include="theme\assets\vendor\prismjs\themes\prism-tomorrow.css" />
     <Content Include="theme\assets\vendor\prismjs\themes\prism-twilight.css" />
     <Content Include="theme\assets\vendor\prismjs\themes\prism.css" />
-    <Content Include="theme\confirm\jquery-confirm.css" />
-    <Content Include="theme\confirm\jquery-confirm.js" />
+    <Content Include="theme\customConfirm\jquery-confirm.css" />
+    <Content Include="theme\customConfirm\jquery-confirm.js" />
     <Content Include="theme\CustomCSS.css" />
+    <Content Include="theme\CustomJS.js" />
+    <Content Include="theme\img\default-product-img.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\BasePage.cs" />
     <Compile Include="Common\FilterAuthorization.cs" />
+    <Compile Include="Common\OSECodeControl.cs" />
     <Compile Include="Controllers\AuthorityController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abstract\IResultState.cs" />
+    <Compile Include="Models\General\TransactionStatus.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Login\LoginViewModel.cs" />
-    <Compile Include="Models\Product\CategoryViewModel.cs" />
+    <Compile Include="Models\Category\CategoryViewModel.cs" />
+    <Compile Include="Models\Product\InsertViewModel.cs" />
+    <Compile Include="Models\Product\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2028,8 +2036,10 @@
     <Content Include="Views\Authority\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Product\CategoryList.cshtml" />
-    <Content Include="theme\confirm\jquery-confirm.less" />
+    <Content Include="Views\Category\CategoryList.cshtml" />
+    <Content Include="theme\customConfirm\jquery-confirm.less" />
+    <Content Include="Views\Product\ProductInsertOrUpdate.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
