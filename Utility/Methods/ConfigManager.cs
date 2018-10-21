@@ -83,17 +83,24 @@ namespace Utility.Methods
 				return GetString("UploadDirectory");
 			}
 		}
-
-
-		public static string UploadDirectoryFolder
+		
+		public static string UploadFolder_User
 		{
 			get
 			{
-				return GetString("UploadDirectoryFolder");
+				return GetString("UploadFolder_User");
 			}
 		}
 
-
+		 
+		public static string UploadFolder_Product
+		{
+			get
+			{
+				return GetString("UploadFolder_Product");
+			}
+		}
+			
 		public static string ImagesPath
 		{
 			get

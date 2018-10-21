@@ -1,16 +1,13 @@
 ﻿using AdminPanel.Common;
-using AdminPanel.Models.General;
 using AdminPanel.Models.Category;
+using AdminPanel.Models.General;
 using Object_Layer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AdminPanel.Controllers
 {
-    public class CategoryController : Controller
+	public class CategoryController : Controller
     {
 
 

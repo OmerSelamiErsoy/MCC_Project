@@ -23,7 +23,7 @@
 	}
 
 }
-		 
+
 
 <div class="row justify-content-center m-b-20">
 
@@ -95,19 +95,19 @@
 						</div>
 						@if (!Model.ISINSERT)
 						{
-						<div class="row">
-							<div class="col-lg-6"></div>
+							<div class="row">
+								<div class="col-lg-6"></div>
 								<div class="col-lg-6">
 									<div class="form-group text-center">
-										<label class="form-control-label" for="inputImage">Ürün Mevcut Resmi</label><br />
+										<label class="form-control-label" for="inputImage">Mevcut Ürün Resmi</label><br />
 										<img src="@Model.PHOTODISPLAY" style="height:180px" class="rounded-circle">
 
 									</div>
 								</div>
 							</div>
-							}
+						}
 
-						</div>
+					</div>
 					<hr class="my-4" />
 					<!-- Address -->
 					<h6 class="heading-small text-muted mb-3">Fiyat Bilgileri</h6>
@@ -167,77 +167,10 @@
 	{
 
 
+	<script src="~/DesingComponent/pageJS/Product.js"></script>
 	<script>
 
 		ddlSelectedValueWriteHidden("ddlCATEGORYID", "CATEGORYID");
 
-
-
-		$("#btnProduct").click(function () {
-
-			var _PRODUCTNAME = $("#PRODUCTNAME").val();
-			var _PRODUCTCODE = $("#PRODUCTCODE").val();
-			var _CATEGORYID = $("#CATEGORYID").val();
-			var _TAX = $("#TAX").val().replace(',', '.');
-			var _PRICE = $("#PRICE").val().replace(',', '.');
-
-			if (_PRODUCTNAME == '') {
-				alertDikkat("Lütfen Ürün İsmi Belirtiniz!")
-				return;
-			}
-			if (_PRODUCTCODE == '') {
-				alertDikkat("Lütfen Ürün Kodu Belirtiniz!")
-				return;
-			}
-			if (_CATEGORYID == '') {
-				alertDikkat("Lütfen Kategori Belirtiniz!")
-				return;
-			}
-			else if (parseInt(_CATEGORYID) <= 0) {
-				alertDikkat("Lütfen Kategori Belirtiniz!")
-				return;
-			}
-
-			if (_TAX == '') {
-				alertDikkat("Lütfen KDV Belirtiniz!")
-				return;
-			}
-
-			if (_PRICE == '') {
-				alertDikkat("Lütfen Fiyat Belirtiniz!")
-				return;
-			}
-			else if (parseFloat(_PRICE) <= 0) {
-				alertDikkat("Lütfen Fiyat Belirtiniz!")
-				return;
-			}
-
-
-			$.confirm({
-				title: 'DİKKAT!',
-				content: 'İşlemi Yapmak İstediğinize Emin Misiniz?',
-				buttons: {
-					EVET: {
-						btnClass: 'btn-green',
-						action: function () {
-
-
-							$("#formAdd").submit();
-
-
-
-						}
-					},
-					HAYIR: {
-						btnClass: 'btn-red',
-						action: function () {
-							//$.alert('Canceled!');
-						}
-					}
-				}
-			});
-
-		});
 	</script>
-
 }

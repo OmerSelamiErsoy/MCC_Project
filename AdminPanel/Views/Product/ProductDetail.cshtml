@@ -1,0 +1,140 @@
+﻿@using Utility.Methods
+@model AdminPanel.Models.Product.ProductViewModel
+
+@{
+	ViewBag.Title = "Ürün Detayı";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ISPROCCESS)
+{
+
+	if (!Model.ISSUCCESSFUL)
+	{
+		 
+		<div class="alert alert-danger m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+			<strong>Dikkat!</strong> @Model.ERROR_MESSAGE
+		</div>
+	}
+
+}
+
+
+<div class="row justify-content-center m-b-20">
+
+
+
+	<div class="col-xl-8 order-xl-1">
+		<div class="card bg-secondary shadow">
+			<div class="card-header bg-white border-0">
+				<div class="row align-items-center">
+					<div class="col-8">
+						<h3 class="mb-0">Ürün Detayı</h3>
+
+					</div>
+					<div class="col-4 text-right">
+						<a href="/Product/ProductList" class="btn btn-sm btn-info">Listeye Dön</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				 
+					
+					<h6 class="heading-small text-muted mb-3">Genel Bilgiler <span class="pull-right">Ürün ID:@Model.PRODUCTS.ID</span></h6>
+					<div class="pl-lg-4 p-l-0">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="PRODUCTNAME">Ürün Adı</label>
+									<input type="text" disabled="disabled"  id="PRODUCTNAME" name="PRODUCTNAME" class="form-control form-control-alternative bg-white"   value="@Model.PRODUCTS.PRODUCTNAME">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="PRODUCTCODE">Ürün Kodu</label>
+									<input type="email" disabled="disabled" id="PRODUCTCODE" name="PRODUCTCODE" class="form-control form-control-alternative bg-white"   value="@Model.PRODUCTS.PRODUCTCODE">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="CATEGORYID">Ürün Kategorisi</label>
+									<input type="email" disabled="disabled" id="CATEGORYNAME" name="CATEGORYNAME" class="form-control form-control-alternative bg-white"   value="@Model.PRODUCTS.CATEGORYNAME">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group text-center">
+									<label class="form-control-label" for="inputImage">Mevcut Ürün Resmi</label>
+									<br />
+									<img src="@Model.PRODUCTS.PHOTODISPLAY" style="height:160px" class="rounded-circle">
+
+								</div>
+							</div>
+						</div>
+						 
+
+					</div>
+					<hr class="my-4" />
+					<!-- Address -->
+					<h6 class="heading-small text-muted mb-3">Fiyat Bilgileri</h6>
+					<div class="pl-lg-4 p-l-0">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="PRICE">Fiyatı (₺) "KDV Dahil"</label>
+									<input type="text" disabled="disabled" id="PRICE" name="PRICE" class="form-control form-control-alternative numberinput bg-white"  value="@String.Format("{0:0,0.00}", Model.PRODUCTS.PRICE)₺">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="TAX">KDV Oranı (%)</label>
+									<input type="text" disabled="disabled" id="TAX" name="TAX" class="form-control form-control-alternative numberinput bg-white"  value="@Model.PRODUCTS.TAX">
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="my-4" />
+					<!-- Description -->
+					<h6 class="heading-small text-muted mb-3">Hakkında</h6>
+					<div class="pl-lg-4 p-l-0">
+						<div class="form-group">
+							<label>Açıklama</label>
+							<textarea rows="4" disabled="disabled" id="DESCRIPTION" name="DESCRIPTION" class="form-control form-control-alternative bg-white">
+@Model.PRODUCTS.DESCRIPTION
+							</textarea>
+						</div>
+					</div>
+
+					<div class="col-lg-12 p-l-0 m-b-20">
+						<div class="custom-control custom-control-alternative custom-checkbox">
+							@Html.CheckBox("ISACTIVE", Model.PRODUCTS.ISACTIVE, new { @class = "custom-control-input", id = "ISACTIVE", @disabled ="true" })
+							<label class="custom-control-label" for="ISACTIVE">
+								<span class="text-muted">
+									@if (Model.PRODUCTS.ISACTIVE)
+									{
+										<text>AKTİF</text>
+									}
+									else
+									{
+										<text>PASİF</TEXT>	
+									}
+								</span>
+							</label>
+						</div>
+					</div>
+					 
+				 
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+@section FooterBottom
+	{
+	 
+
+}

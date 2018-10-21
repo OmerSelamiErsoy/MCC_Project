@@ -1,8 +1,16 @@
-﻿/* Generic border Helpers
+﻿.pull-right {
+	float:right !important;
+}
+
+.pull-left {
+	float: left !important;
+}
+
+/* Generic border Helpers
 ------------------------------------
 */
 .b-0 {
-    border: 0px !important;
+	border: 0px !important;
 }
 .b-b-0 {
     border-bottom:0px !important;

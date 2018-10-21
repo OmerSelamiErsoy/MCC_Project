@@ -1,0 +1,93 @@
+﻿@model WebApplication.Models.Product.ProductViewModel
+@{
+    ViewBag.Title = "Ürün Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="new-arrivals" class="new-arrivals ">
+	<div class="container m-t-20 p-l-0 p-r-0">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Anasayfa</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Ürün Listele</li>
+				@if (!String.IsNullOrEmpty(Model.SELECTEDCATEGORY))
+				{
+
+					<li class="breadcrumb-item active" aria-current="page">@Model.SELECTEDCATEGORY</li>
+				}
+			</ol>
+		</nav>
+		@*<div class="section-header">
+			<h2>new arrivals</h2>
+		</div>*@
+	<!--/.section-header-->
+		<div class="new-arrivals-content m-t-20">
+			<div class="row">
+				<div class="col-md-3 col-sm-12">
+
+					<ul class="list-group">
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+							KATEGORİLER
+							<a href="/Product/ProductList" class="badge_c badge_c-info pull-right">Tümü</a>
+						</li>
+						@for (int i = 0; i < Model.LIST_CATEGORIES.Count(); i++)
+						{
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+							<a href="/Product/ProductList/@Model.LIST_CATEGORIES[i].ID">@Model.LIST_CATEGORIES[i].CATEGORYNAME</a>
+							<span class="badge badge-primary badge-pill">@Model.LIST_CATEGORIES[i].PRODUCTCOUNT</span>
+						</li>
+						}
+					</ul>
+
+					 
+
+				</div>
+				<div class="col-md-9 col-sm-12">
+					<div class="row">
+						@if (Model.LIST_PRODUCTS.Count() > 0)
+						{
+							for (int i = 0; i < Model.LIST_PRODUCTS.Count(); i++)
+							{
+								<div class="col-md-3 col-sm-4">
+									<div class="single-new-arrival">
+										<div class="single-new-arrival-bg">
+											<img src="@Model.LIST_PRODUCTS[i].PHOTODISPLAY" alt="new-arrivals images">
+											<div class="single-new-arrival-bg-overlay"></div>
+											<div class="new-arrival-cart">
+												<p>
+													<span class="lnr lnr-cart"></span>
+													<a href="#">Sepete Ekle</a>
+												</p>
+												<p class="arrival-review pull-right">
+													<span class="lnr lnr-heart"></span>
+													<span class="lnr lnr-frame-expand"></span>
+												</p>
+											</div>
+										</div>
+										<h4 class="h-75"><a href="/Product/ProductDetail/@Model.LIST_PRODUCTS[i].ID">@Model.LIST_PRODUCTS[i].PRODUCTNAME</a></h4>
+										<p class="arrival-product-price text-danger">@String.Format("{0:0,0.00}", Model.LIST_PRODUCTS[i].PRICE) ₺</p>
+									</div>
+								</div>
+							}
+						}
+						else
+						{
+							<div class="col-md-12 col-sm-12">
+								<div class="alert alert-danger" role="alert">
+									Üzgünüz! Herhangi bir ürün bulunmuyor.
+								</div>
+							</div>
+						}
+
+
+
+
+					</div>
+					</div>
+				
+			</div>
+			</div>
+	</div><!--/.container-->
+
+</section>
+

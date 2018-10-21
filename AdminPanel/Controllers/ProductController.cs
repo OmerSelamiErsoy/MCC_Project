@@ -3,8 +3,6 @@ using AdminPanel.Models.General;
 using AdminPanel.Models.Product;
 using Object_Layer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -12,7 +10,7 @@ using Utility.Methods;
 
 namespace AdminPanel.Controllers
 {
-    public class ProductController : Controller
+	public class ProductController : Controller
     {
 
 		[FilterAuthorization]
@@ -45,11 +43,36 @@ namespace AdminPanel.Controllers
 
 
 
+
+		[FilterAuthorization]
+		public ActionResult ProductDetail(int ID = 0)
+		{
+			ProductViewModel Model = new ProductViewModel();
+			try
+			{
+				Model.PRODUCTS = TBL_PRODUCTS.SINGLE(ID: ID);
+				Model.ISPROCCESS = false;
+			}
+			catch (Exception ex)
+			{
+
+				Model.PRODUCTS = new TBL_PRODUCTS();
+				Model.PRODUCTS.PHOTOADDRESS = ConfigManager.DefaultProductImage;
+				Model.ISPROCCESS = true;
+				Model.ISSUCCESSFUL = false;
+				Model.ERROR_MESSAGE = "İşlem sırasında bir hata oluştu! Lütfen böyle bir ürünün varlığından emin olun.";
+			}
+			
+			return View(Model);
+		}
+
+
 		[FilterAuthorization]
 		public ActionResult ProductInsertOrUpdate(int ID = 0)
 		{
 			InsertViewModel Model = new InsertViewModel();
 			Model.ISPROCCESS = false;
+			Model.ISINSERT = true;
 			Model.CATEGORYLIST = TBL_CATEGORIES.LIST().ConvertAll(t =>
 			{
 				return new SelectListItem()
@@ -62,24 +85,33 @@ namespace AdminPanel.Controllers
 
 			if (ID > 0)
 			{
-				TBL_PRODUCTS T = TBL_PRODUCTS.LIST(ID)[0];
-				Model.CATEGORYID = T.CATEGORYID;
-				Model.DESCRIPTION = T.DESCRIPTION;
-				Model.ISACTIVE = T.ISACTIVE;
-				Model.PHOTOADDRESS = T.PHOTOADDRESS;
-				Model.PRICE = T.PRICE;
-				Model.PRODUCTCODE = T.PRODUCTCODE;
-				Model.PRODUCTNAME = T.PRODUCTNAME;
-				Model.TAX = T.TAX;
-				Model.ID = ID;
-				Model.ISINSERT = false;
+				try
+				{
+					TBL_PRODUCTS T = TBL_PRODUCTS.SINGLE(ID: ID);
+					Model.CATEGORYID = T.CATEGORYID;
+					Model.DESCRIPTION = T.DESCRIPTION;
+					Model.ISACTIVE = T.ISACTIVE;
+					Model.PHOTOADDRESS = T.PHOTOADDRESS;
+					Model.PRICE = T.PRICE;
+					Model.PRODUCTCODE = T.PRODUCTCODE;
+					Model.PRODUCTNAME = T.PRODUCTNAME;
+					Model.TAX = T.TAX;
+					Model.ID = ID;
+					Model.ISINSERT = false;
+				}
+				catch (Exception ex)
+				{
+					Model.ISPROCCESS = true;
+					Model.ISSUCCESSFUL = false;
+					Model.ERROR_MESSAGE = "İşlem sırasında bir hata oluştu! Lütfen böyle bir ürünün varlığından emin olun.";
+				}
+				
 			}
 			else
 			{
 				Model.ISACTIVE = true;
 				Model.CATEGORYID = -1;
-				Model.ID = ID;
-				Model.ISINSERT = true;
+				Model.ID = 0;			  
 			}
 			
 
@@ -116,7 +148,7 @@ namespace AdminPanel.Controllers
 				if (inputImage.ContentType == "image/jpeg" || inputImage.ContentType == "image/jpg" || inputImage.ContentType == "image/png")
 				{
 					WebImage img = new WebImage(inputImage.InputStream);
-					string UploadDFolder = ConfigManager.UploadDirectoryFolder;
+					string UploadDFolder = ConfigManager.UploadFolder_Product;
 					DOSYAYOLU = BasePage.ImgUpload(img, ConfigManager.UploadDirectory, UploadDFolder);
 				}
 				else
@@ -127,24 +159,29 @@ namespace AdminPanel.Controllers
 			}
 			else
 			{
-				DOSYAYOLU = ConfigManager.DefaultProductImage;
+				//insert işlemi ise
+				if (Model.ID == 0)
+					DOSYAYOLU = ConfigManager.DefaultProductImage;
 			}
 
 
 			if (Model.ID > 0)
 			{
-				TBL_PRODUCTS T = TBL_PRODUCTS.LIST(Model.ID)[0];
+				TBL_PRODUCTS T = TBL_PRODUCTS.SINGLE(ID:Model.ID);
 				T.CATEGORYID = Model.CATEGORYID;
 				T.DESCRIPTION = Model.DESCRIPTION;
 				T.ISACTIVE = Model.ISACTIVE;
-				if(inputImage != null)
-					T.PHOTOADDRESS = DOSYAYOLU;
 				T.PRICE = Model.PRICE;
 				T.PRODUCTCODE = Model.PRODUCTCODE;
 				T.PRODUCTNAME = Model.PRODUCTNAME;
 				T.TAX = Model.TAX;
 				T.LASTCHANGEUSERID = BasePage.LoginUserInf.ID;
-				T.LASTCHANGEDATE = DateTime.Now;	 
+				T.LASTCHANGEDATE = DateTime.Now;
+				if (!String.IsNullOrEmpty(DOSYAYOLU))
+				{
+					T.PHOTOADDRESS = DOSYAYOLU;
+					Model.PHOTOADDRESS = DOSYAYOLU;
+				}
 				TBL_PRODUCTS.UPDATE(T);
 
 				Model.ISINSERT = false;

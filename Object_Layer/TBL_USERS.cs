@@ -34,7 +34,7 @@ namespace Object_Layer
 			return _dbEntityManager.Update<TBL_USERS>(ObjectList, sp_UPDATE, PrimaryKeyName);
 		}
 
-		public static List<TBL_USERS> LIST(int? ID = null, string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null, bool ISACTIVE = true)
+		public static List<TBL_USERS> LIST(int? ID = null, string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null, bool? ISACTIVE = null)
 		{
 			SqlParameter[] Param = {
 									new SqlParameter("@ID", ID),
@@ -46,9 +46,9 @@ namespace Object_Layer
 			return _dbEntityManager.ListParam<TBL_USERS>(sp_LIST, Param);
 		}
 
-		public static TBL_USERS LIST_LOGIN( string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null)
+		public static TBL_USERS SINGLE( string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null)
 		{
-			var result = LIST(EMAIL: EMAIL, PASSWORD: PASSWORD, ISEXECUTIVE: ISEXECUTIVE);
+			var result = LIST(EMAIL: EMAIL, PASSWORD: PASSWORD, ISEXECUTIVE: ISEXECUTIVE,ISACTIVE:true);
 			if (result == null || result.Count == 0)
 				return null;
 			else
@@ -84,7 +84,10 @@ namespace Object_Layer
 		public DateTime CREATEDATE { get; set; }
 
 		[DBField("CREATEUSERID")]
-		public int CREATEUSERID { get; set; }
+		public int CREATEUSERID { get; set; }	  
+
+		[DBField("CREATEUSERNAME",0)]
+		public string CREATEUSERNAME { get; set; }
 
 		[DBField("LASTCHANGEDATE")]
 		public DateTime LASTCHANGEDATE { get; set; }

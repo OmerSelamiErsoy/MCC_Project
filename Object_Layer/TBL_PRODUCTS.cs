@@ -37,15 +37,26 @@ namespace Object_Layer
 			return _dbEntityManager.Update<TBL_PRODUCTS>(ObjectList, sp_UPDATE, PrimaryKeyName);
 		}
 
-		public static List<TBL_PRODUCTS> LIST(int? ID = null, int? CREATEUSERID = null)
+		public static List<TBL_PRODUCTS> LIST(int? ID = null, int? CATEGORYID = null, bool? ISACTIVE = null, bool? ISACTIVE_CATEGORY = null, int? CREATEUSERID = null)
 		{
 			SqlParameter[] Param = {
 									new SqlParameter("@ID", ID),
+									new SqlParameter("@CATEGORYID", CATEGORYID)  ,
+									new SqlParameter("@ISACTIVE", ISACTIVE),	   
+									new SqlParameter("@ISACTIVE_CATEGORY", ISACTIVE_CATEGORY),
 									new SqlParameter("@CREATEUSERID", CREATEUSERID)
 			};
 			return _dbEntityManager.ListParam<TBL_PRODUCTS>(sp_LIST, Param);
 		}
 
+		public static TBL_PRODUCTS SINGLE(int? ID = null, int? CATEGORYID = null, bool? ISACTIVE = null, bool? ISACTIVE_CATEGORY = null, int? CREATEUSERID = null)
+		{
+			var result = LIST(ID: ID, CATEGORYID: CATEGORYID, ISACTIVE: ISACTIVE, ISACTIVE_CATEGORY: ISACTIVE_CATEGORY, CREATEUSERID: CREATEUSERID);
+			if (result == null || result.Count == 0)
+				return null;
+			else
+				return result[0];
+		}
 
 		[DBField("ID", true)]
 		public int ID { get; set; }
@@ -94,6 +105,8 @@ namespace Object_Layer
 
 		[DBField("LASTCHANGEUSERID")]
 		public int? LASTCHANGEUSERID { get; set; }
+ 
+		public double PRICETAXWITHOUT { get { return PRICE / TAX.ToTax(); } }
 
 		// Burada attribute vermedik çünki bu kolon db'de bulunmuyor. Veri tabanından direk şekilde herhangi bir insert update delete list işlemine katılmıyor.
 		public string PHOTODISPLAY { get { return ConfigManager.ImagesPath + PHOTOADDRESS; }  }

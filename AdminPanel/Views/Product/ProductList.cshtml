@@ -41,50 +41,51 @@
 
 								@for (int i = 0; i < Model.List_PRODUCTS.Count(); i++)
 								{
-								<tr id="tr_@Model.List_PRODUCTS[i].ID">
-									<th scope="row">
-										<img src="@Model.List_PRODUCTS[i].PHOTODISPLAY" style="height:24px;border:1px solid #ccc;" class="rounded-circle pull-left">
-										<span class="mb-0 text-sm" id="PRODUCTNAME_@Model.List_PRODUCTS[i].ID">@Model.List_PRODUCTS[i].PRODUCTNAME</span>
+									<tr id="tr_@Model.List_PRODUCTS[i].ID">
+										<th scope="row">
+											<img src="@Model.List_PRODUCTS[i].PHOTODISPLAY" style="height:24px;border:1px solid #ccc;" class="rounded-circle pull-left">
+											<span class="mb-0 text-sm" id="PRODUCTNAME_@Model.List_PRODUCTS[i].ID">@Model.List_PRODUCTS[i].PRODUCTNAME</span>
 
-									</th>
-									<td class="text-center">
-										@Model.List_PRODUCTS[i].PRODUCTCODE
-									</td>
-									<td class="text-center">
-										@Model.List_PRODUCTS[i].CATEGORYNAME
-									</td>
-									<td class="text-center">
+										</th>
+										<td class="text-center">
+											@Model.List_PRODUCTS[i].PRODUCTCODE
+										</td>
+										<td class="text-center">
+											@Model.List_PRODUCTS[i].CATEGORYNAME
+										</td>
+										<td class="text-center">
 
-										@if (Model.List_PRODUCTS[i].ISACTIVE)
-										{
-											<span class="badge badge-dot mr-4">
-												<i class="bg-success"></i> Aktif
-											</span>
-										}
-										else
-										{
-											<span class="badge badge-dot mr-4">
-												<i class="bg-warning"></i> Pasif
-											</span>
-										}
+											@if (Model.List_PRODUCTS[i].ISACTIVE)
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-success"></i> Aktif
+												</span>
+											}
+											else
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-warning"></i> Pasif
+												</span>
+											}
 
-										<input type="hidden" id="ISACTIVE_@Model.List_PRODUCTS[i].ID" value="@Model.List_PRODUCTS[i].ISACTIVE" />
+											<input type="hidden" id="ISACTIVE_@Model.List_PRODUCTS[i].ID" value="@Model.List_PRODUCTS[i].ISACTIVE" />
 
-									</td>
-									<td class="text-center">
-										@String.Format("{0:0,0.00}", Model.List_PRODUCTS[i].PRICE)₺
-									</td>
-									<td class="text-center">
-										% @Model.List_PRODUCTS[i].TAX
-									</td>
-									<td class="text-center">
-										@Model.List_PRODUCTS[i].CREATEUSERNAME
-									</td>
-									<td class="text-right">
-										<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_PRODUCTS[i].ID)">SİL</button>
-										<a   class="btn btn-warning btn-sm" href="/Product/ProductInsertOrUpdate/@Model.List_PRODUCTS[i].ID">GÜNCELLE</a>
-									</td>
-								</tr>
+										</td>
+										<td class="text-center">
+											@String.Format("{0:0,0.00}", Model.List_PRODUCTS[i].PRICE)₺
+										</td>
+										<td class="text-center">
+											% @Model.List_PRODUCTS[i].TAX
+										</td>
+										<td class="text-center">
+											@Model.List_PRODUCTS[i].CREATEUSERNAME
+										</td>
+										<td class="text-right">
+											<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_PRODUCTS[i].ID)">SİL</button>
+											<a class="btn btn-warning btn-sm" href="/Product/ProductInsertOrUpdate/@Model.List_PRODUCTS[i].ID">GÜNCELLE</a>
+											<a class="btn btn-info btn-sm" href="/Product/ProductDetail/@Model.List_PRODUCTS[i].ID">DETAY</a>
+										</td>
+									</tr>
 								}
 
 
@@ -124,7 +125,7 @@
 				else
 				{
 					<div class="alert alert-default m-l-10 m-r-10 m-t-10 m-b-20" role="alert">
-						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir ürün bulunmuyor! Lütfen Ekleyiniz.
+						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir Kullanıcı bulunmuyor! Lütfen Ekleyiniz.
 					</div>
 				}
 
@@ -138,63 +139,9 @@
 
 @section FooterBottom
 	{
+	 
 
-
-	<script>
-
-
-
-		function DELETE(ID) {
-
-			var _ProductName = $("#PRODUCTNAME_" + ID).text();
-			$.confirm({
-				title: 'DİKKAT!',
-				content: _ProductName + ' Ürününü SİLMEK istediğinize emin misiniz?',
-				buttons: {
-					EVET: {
-						btnClass: 'btn-green',
-						action: function () {
-							$("#Divresult").hide();
-
-
-							try {
-								$.ajax({
-									url: "/Product/ProductDelete",
-									data: {
-										ID: ID
-									},
-									type: 'POST',
-									dataType: 'json',
-									success: function (data) {
-										if (data.ISSUCCESSFUL) {
-											$('#tr_' + ID).remove();
-											alertDikkat(_ProductName + " Ürünü Silinmiştir.");
-										}
-										else {
-											alertDikkat(data.ERROR_MESSAGE);
-										}
-									}
-								});
-							}
-							catch (e) {
-								alertDikkat("Beklenmeyen Hata! <br/>" + e.description);
-							}
-
-
-						}
-					},
-					HAYIR: {
-						btnClass: 'btn-red',
-						action: function () {
-							//$.alert('Canceled!');
-						}
-					}
-				}
-			});
-
-		}
-
-	</script>
+	<script src="~/DesingComponent/pageJS/Product.js"></script>
 
 }
 

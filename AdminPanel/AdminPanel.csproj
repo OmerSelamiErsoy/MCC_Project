@@ -89,6 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesingComponent\pageJS\Category.js" />
+    <Content Include="DesingComponent\pageJS\Product.js" />
+    <Content Include="DesingComponent\pageJS\User.js" />
     <Content Include="Global.asax" />
     <Content Include="theme\assets\css\argon.css" />
     <Content Include="theme\assets\css\argon.min.css" />
@@ -1787,11 +1790,11 @@
     <Content Include="theme\assets\vendor\prismjs\themes\prism-tomorrow.css" />
     <Content Include="theme\assets\vendor\prismjs\themes\prism-twilight.css" />
     <Content Include="theme\assets\vendor\prismjs\themes\prism.css" />
-    <Content Include="theme\customConfirm\jquery-confirm.css" />
-    <Content Include="theme\customConfirm\jquery-confirm.js" />
-    <Content Include="theme\CustomCSS.css" />
-    <Content Include="theme\CustomJS.js" />
-    <Content Include="theme\img\default-product-img.png" />
+    <Content Include="DesingComponent\customConfirm\jquery-confirm.css" />
+    <Content Include="DesingComponent\customConfirm\jquery-confirm.js" />
+    <Content Include="DesingComponent\CustomCSS.css" />
+    <Content Include="DesingComponent\CustomJS.js" />
+    <Content Include="DesingComponent\img\default-product-img.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1803,6 +1806,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1813,6 +1817,8 @@
     <Compile Include="Models\Category\CategoryViewModel.cs" />
     <Compile Include="Models\Product\InsertViewModel.cs" />
     <Compile Include="Models\Product\ProductViewModel.cs" />
+    <Compile Include="Models\User\InsertViewModel.cs" />
+    <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2037,9 +2043,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Category\CategoryList.cshtml" />
-    <Content Include="theme\customConfirm\jquery-confirm.less" />
+    <Content Include="DesingComponent\customConfirm\jquery-confirm.less" />
     <Content Include="Views\Product\ProductInsertOrUpdate.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\User\UserInsertOrUpdate.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\User\UserDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

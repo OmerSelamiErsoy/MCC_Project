@@ -89,19 +89,96 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesingComponent\customConfirm\jquery-confirm.css" />
+    <Content Include="DesingComponent\customConfirm\jquery-confirm.js" />
+    <Content Include="DesingComponent\CustomCSS.css" />
+    <Content Include="DesingComponent\CustomJS.js" />
     <Content Include="Global.asax" />
+    <Content Include="theme\assets\css\animate.css" />
+    <Content Include="theme\assets\css\bootsnav.css" />
+    <Content Include="theme\assets\css\bootstrap.min.css" />
+    <Content Include="theme\assets\css\font-awesome.min.css" />
+    <Content Include="theme\assets\css\linearicons.css" />
+    <Content Include="theme\assets\css\owl.carousel.min.css" />
+    <Content Include="theme\assets\css\owl.theme.default.min.css" />
+    <Content Include="theme\assets\css\responsive.css" />
+    <Content Include="theme\assets\css\style.css" />
+    <Content Include="theme\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="theme\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="theme\assets\fonts\Linearicons-Free.svg" />
+    <Content Include="theme\assets\images\blog\b1.jpg" />
+    <Content Include="theme\assets\images\blog\b2.jpg" />
+    <Content Include="theme\assets\images\blog\b3.jpg" />
+    <Content Include="theme\assets\images\clients\c1.png" />
+    <Content Include="theme\assets\images\clients\c2.png" />
+    <Content Include="theme\assets\images\clients\c3.png" />
+    <Content Include="theme\assets\images\clients\c4.png" />
+    <Content Include="theme\assets\images\clients\c5.png" />
+    <Content Include="theme\assets\images\collection\arrivals1.png" />
+    <Content Include="theme\assets\images\collection\arrivals2.png" />
+    <Content Include="theme\assets\images\collection\arrivals3.png" />
+    <Content Include="theme\assets\images\collection\arrivals4.png" />
+    <Content Include="theme\assets\images\collection\arrivals5.png" />
+    <Content Include="theme\assets\images\collection\arrivals6.png" />
+    <Content Include="theme\assets\images\collection\arrivals7.png" />
+    <Content Include="theme\assets\images\collection\arrivals8.png" />
+    <Content Include="theme\assets\images\collection\sofa-collection-banner.jpg" />
+    <Content Include="theme\assets\images\collection\table-banner.jpg" />
+    <Content Include="theme\assets\images\features\f1.jpg" />
+    <Content Include="theme\assets\images\features\f2.jpg" />
+    <Content Include="theme\assets\images\features\f3.jpg" />
+    <Content Include="theme\assets\images\features\f4.jpg" />
+    <Content Include="theme\assets\images\populer-products\p1.png" />
+    <Content Include="theme\assets\images\populer-products\p2.png" />
+    <Content Include="theme\assets\images\populer-products\p3.png" />
+    <Content Include="theme\assets\images\slider\slider1.png" />
+    <Content Include="theme\assets\images\slider\slider2.png" />
+    <Content Include="theme\assets\images\slider\slider3.png" />
+    <Content Include="theme\assets\js\bootsnav.js" />
+    <Content Include="theme\assets\js\bootstrap.min.js" />
+    <Content Include="theme\assets\js\custom.js" />
+    <Content Include="theme\assets\js\feather.min.js" />
+    <Content Include="theme\assets\js\jquery.js" />
+    <Content Include="theme\assets\js\owl.carousel.min.js" />
+    <Content Include="theme\assets\logo\favicon.png" />
+    <Content Include="theme\assets\logo\logo.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\OrderBasket.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abstract\IResultState.cs" />
+    <Compile Include="Models\General\TransactionStatus.cs" />
+    <Compile Include="Models\Product\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="DesingComponent\customConfirm\jquery-confirm.less" />
     <None Include="packages.config" />
+    <Content Include="theme\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="theme\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="theme\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="theme\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="theme\assets\fonts\FontAwesome.otf" />
+    <Content Include="theme\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="theme\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="theme\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="theme\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="theme\assets\fonts\Linearicons-Free.eot" />
+    <Content Include="theme\assets\fonts\Linearicons-Free.ttf" />
+    <Content Include="theme\assets\fonts\Linearicons-Free.woff" />
+    <Content Include="theme\assets\fonts\Linearicons-Free.woff2" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,8 +188,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Basket\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Log_Layer\Log_Layer.csproj">
+      <Project>{28346be3-223f-41da-bdab-9f8c9a5e933d}</Project>
+      <Name>Log_Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Object_Layer\Object_Layer.csproj">
+      <Project>{fdc24b27-f48f-4b3e-87c4-87c2f0800615}</Project>
+      <Name>Object_Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{29a76274-a7a6-4223-aeec-cafc3a6d2725}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

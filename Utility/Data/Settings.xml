@@ -2,12 +2,12 @@
 <Lists Key="Configuration">
   <List Key="Configuration">
  
-    <Item Name="Connnection_DB" Value ="Server=.;Database=MCC_PRODB;Trusted_Connection=True;"></Item> 
+    <Item Name="Connnection_DB" Value ="Server=.;Database=MCC_PRODB;Trusted_Connection=True;application name=localUSERID"></Item> 
   
     <Item	Name="IsDirectorylocal"					   Value="true" /> 
     <Item Name="IsLOG"                       Value="false" />  
 
-    <Item Name="WEBDirectoryLocal" Value="http://localhost:7902" />
+    <Item Name="WEBDirectoryLocal" Value="http://localhost:53892" />
     <Item Name="WEBDirectory" Value="https://www.web.net" /> 
     
 
@@ -26,7 +26,8 @@
     <Item Name="DefaultProductImage" Value ="/theme/img/default-product-img.png"></Item>
 
     <Item Name="UploadDirectory"               Value ="C:\Users\NamarufToralp\Source\repos\MCC_Project\AdminPanel"></Item>  
-    <Item Name="UploadDirectoryFolder"   Value ="\Dokumanlar\"></Item>
+    <Item Name="UploadFolder_Product"   Value ="\Dokumanlar\Product\"></Item>
+    <Item Name="UploadFolder_User"   Value ="\Dokumanlar\User\"></Item>
   
     <Item Name="CommandTimeout"                Value="18000" />  
     

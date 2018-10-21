@@ -1,0 +1,144 @@
+﻿@model WebApplication.Models.Product.ProductViewModel
+@{
+	ViewBag.Title = "Ürün Detayı";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="new-arrivals" class="new-arrivals ">
+	<div class="container m-t-20 p-l-0 p-r-0">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Anasayfa</a></li>
+				<li class="breadcrumb-item"><a href="/Product/ProductList">Ürün Listele</a></li>
+				<li class="breadcrumb-item"><a href="/Product/ProductList/@Model.PRODUCTS.CATEGORYID">@Model.PRODUCTS.CATEGORYNAME</a></li>
+				<li class="breadcrumb-item active" aria-current="page">@Model.PRODUCTS.PRODUCTNAME</li>
+			</ol>
+		</nav>
+		@*<div class="section-header">
+				<h2>new arrivals</h2>
+			</div>*@
+		<!--/.section-header-->
+		<div class="new-arrivals-content m-t-20">
+			<div class="row">
+
+				<div class="col-md-12 col-sm-12">
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="single-populer-products">
+								<div class="single-inner-populer-products">
+									<div class="row">
+										<div class="col-md-4 col-sm-12">
+											<div class="single-inner-populer-product-img text-center">
+												<img src="@Model.PRODUCTS.PHOTODISPLAY" style="height:200px;" alt="populer-products images">
+											</div>
+										</div>
+										<div class="col-md-8 col-sm-12">
+											<div class="single-inner-populer-product-txt">
+												<h2>
+													<a href="#">
+														@Model.PRODUCTS.PRODUCTNAME
+													</a>
+												</h2>
+												<p>
+													Edi ut perspiciatis unde omnis iste natusina error sit voluptatem accusantium doloret mque laudantium, totam rem aperiam.
+												</p>
+												<div class="populer-products-price">
+													<h4>Satış fiyatı (KDV Dahil) <span>@String.Format("{0:0,0.00}", Model.PRODUCTS.PRICE) ₺</span></h4>
+												</div>
+												@*<div class="populer-products-price">
+														<h4> (KDV Hariç) <span>@String.Format("{0:0,0.00}", Model.PRODUCTS.PRICETAXWITHOUT) ₺</span></h4>
+													</div>*@
+												<br />
+
+												<div class="form-group ">
+													<div class="input-group w-150">
+														<input type="text" class="form-control numberinput" id="BasketAmount" placeholder="Adet" onkeypress="inputEnterBtn(event,'btnAddBasket')" onkeydown="inputEnterBtn(event,'btnAddBasket')">
+														<div class="input-group-addon">Adet</div>
+													</div>
+													<button class="btn-cart welcome-add-cart populer-products-btn" id="btnAddBasket">
+														SEPETE EKLE
+													</button>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 p-t-20 p-b-10">
+							<ul class="nav nav-tabs">
+								<li role="presentation" class="active"><a href="#DESC">AÇIKLAMA</a></li>
+							</ul>
+						</div>
+						<div class="tab-content p-t-20">
+							<div id="DESC" class="tab-pane fade in active p-l-10 m-t-20">
+								@Model.PRODUCTS.DESCRIPTION
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div><!--/.container-->
+
+</section>
+
+
+
+@section FooterBottom
+	{
+
+
+ <script>
+
+
+	 $("#btnAddBasket").click(function () {
+
+		 
+		 var _BasketAmount = $("#BasketAmount").val().replace(',', '.'); 
+
+		 
+		 if (_BasketAmount == "" || parseInt(_BasketAmount) <= 0) {
+			 alertDikkat("Lütfen Adet Belirtiniz!")
+			 return;
+		 }
+ 
+
+
+		 $.confirm({
+			 title: 'DİKKAT!',
+			 content: 'İşlemi Yapmak İstediğinize Emin Misiniz?',
+			 buttons: {
+				 EVET: {
+					 btnClass: 'btn-green',
+					 action: function () {
+
+
+						 
+
+
+
+					 }
+				 },
+				 HAYIR: {
+					 btnClass: 'btn-red',
+					 action: function () {
+						 //$.alert('Canceled!');
+					 }
+				 }
+			 }
+		 });
+
+	 });
+	</script>
+
+}
+
+

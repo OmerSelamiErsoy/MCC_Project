@@ -45,6 +45,17 @@ namespace Object_Layer
 			return _dbEntityManager.ListParam<TBL_CATEGORIES>(sp_LIST, Param);
 		}
 
+		public static TBL_CATEGORIES SINGLE(int? ID = null, int? CREATEUSERID = null, bool? ISACTIVE = null, bool? ISPRODUCTCOUNT = null)
+		{
+			var result = LIST(ID: ID, CREATEUSERID: CREATEUSERID, ISACTIVE: ISACTIVE, ISPRODUCTCOUNT: ISPRODUCTCOUNT);
+			if (result == null || result.Count == 0)
+				return null;
+			else
+				return result[0];
+		}
+
+
+
 
 		[DBField("ID", true)]
 		public int ID { get; set; }

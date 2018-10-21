@@ -104,7 +104,20 @@ namespace Utility.Methods
 			}
 			return Document;
 		}
+		public static double ToTax(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return 0;
 
+			try
+			{
+				return 1+(Convert.ToDouble(str)/100);
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
 		public static Int32 ToInt32(this object str)
 		{
 			if (str == null || string.IsNullOrEmpty(str.ToString()))

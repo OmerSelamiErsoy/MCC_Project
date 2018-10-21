@@ -12,6 +12,8 @@ namespace AdminPanel.Models.Product
 
 		public List<TBL_PRODUCTS> List_PRODUCTS{ get; set; }
 
+		public TBL_PRODUCTS PRODUCTS { get; set; }
+
 		public bool ISPROCCESS { get; set; } = false;
 		public bool ISSUCCESSFUL { get; set; }
 		public string MESSAGE { get; set; }

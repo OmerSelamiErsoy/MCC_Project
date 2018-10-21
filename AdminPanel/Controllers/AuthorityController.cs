@@ -2,16 +2,12 @@
 using AdminPanel.Models.Login;
 using Log_Layer.Manager;
 using Object_Layer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AdminPanel.Controllers
 {
-    public class AuthorityController : Controller
+	public class AuthorityController : Controller
     {
         // GET: Authority
         public ActionResult Login()
@@ -44,7 +40,7 @@ namespace AdminPanel.Controllers
 
 			if (ModelState.IsValid)
 			{
-				TBL_USERS KT = TBL_USERS.LIST_LOGIN(EMAIL: UG.EPOSTA, PASSWORD: UG.SIFRE, ISEXECUTIVE: true);
+				TBL_USERS KT = TBL_USERS.SINGLE(EMAIL: UG.EPOSTA, PASSWORD: UG.SIFRE, ISEXECUTIVE: true);
 				if (KT == null)
 				{
 					ModelState.AddModelError("", "Hatalı Eposta veya Şifre girdiniz!");

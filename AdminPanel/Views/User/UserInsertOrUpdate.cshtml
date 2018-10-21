@@ -1,0 +1,143 @@
+﻿@using Utility.Methods
+@model AdminPanel.Models.User.InsertViewModel
+
+@{
+	ViewBag.Title = "Kullanıcı Ekleme - Güncelleme İşlemleri";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ISPROCCESS)
+{
+
+	if (Model.ISSUCCESSFUL)
+	{
+		<div class="alert alert-success m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+			<strong>Tebrikler!</strong> @Model.MESSAGE
+		</div>
+	}
+	else
+	{
+		<div class="alert alert-danger m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+			<strong>Dikkat!</strong> @Model.ERROR_MESSAGE
+		</div>
+	}
+
+}
+
+
+<div class="row justify-content-center m-b-20">
+
+
+
+	<div class="col-xl-8 order-xl-1">
+		<div class="card bg-secondary shadow">
+			<div class="card-header bg-white border-0">
+				<div class="row align-items-center">
+					<div class="col-8">
+						@if (Model.ISINSERT)
+						{
+							<h3 class="mb-0">Kullanıcı Ekle</h3>
+						}
+						else
+						{
+							<h3 class="mb-0">Kullanıcı Güncelle</h3>
+						}
+
+					</div>
+					<div class="col-4 text-right">
+						<a href="/User/UserList" class="btn btn-sm btn-info">Listeye Dön</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				@using (Html.BeginForm("UserInsertOrUpdate", "User", FormMethod.Post, new { id = "formAdd" }))
+				{
+					@Html.HiddenFor(model => model.ID)
+					<h6 class="heading-small text-muted mb-3">Genel Bilgiler</h6>
+					<div class="pl-lg-4 p-l-0">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="FULLNAME">Kullanıcı Adı</label>
+									@Html.TextBoxFor(model => model.FULLNAME, new { @class = "form-control form-control-alternative", placeholder = "Kullanıcı Adı", required = "" }) 
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="PHONE">Telefon</label>
+									@Html.TextBoxFor(model => model.PHONE, new { @class = "form-control form-control-alternative", placeholder = "Telefon Numrası"}) 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="EMAIL">EPosta</label>
+									@Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control form-control-alternative", placeholder = "Eposta", required = "" }) 
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="form-control-label" for="PASSWORD">Şifre</label>
+									@Html.TextBoxFor(model => model.PASSWORD, new { @class = "form-control form-control-alternative", placeholder = "Şifre", required = "" }) 
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="my-4" />
+					<!-- Address -->
+					<h6 class="heading-small text-muted mb-3">Hakkında</h6>
+					<div class="pl-lg-4 p-l-0">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="custom-control custom-control-alternative custom-checkbox">
+									@Html.CheckBox("ISACTIVE", Model.ISACTIVE, new { @class = "custom-control-input", id = "ISACTIVE"})
+									<label class="custom-control-label" for="ISACTIVE">
+										<span class="text-muted">
+											Aktif
+											
+										</span>
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="custom-control custom-control-alternative custom-checkbox">
+									@Html.CheckBox("ISEXECUTIVE", Model.ISEXECUTIVE, new { @class = "custom-control-input", id = "ISEXECUTIVE" })
+									<label class="custom-control-label" for="ISEXECUTIVE">
+										<span class="text-muted">
+											YÖNETİCİ
+										</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					 
+					<hr class="my-4" />
+					<!-- Description -->
+					<div class="pl-lg-4">
+						<div class="form-group text-center m-b-0">
+							@OSEHtmlControl.myButton("btnProduct", "submit", "KAYDET", Enumeration.myButtonType.SUCCESS)
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+@section FooterBottom
+	{
+
+
+	<script src="~/DesingComponent/pageJS/User.js"></script>
+	<script>
+
+		 
+
+	</script>
+}

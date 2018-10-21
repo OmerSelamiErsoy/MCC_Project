@@ -1,0 +1,134 @@
+﻿@using Utility.Methods
+@model AdminPanel.Models.User.UserViewModel
+
+@{
+	ViewBag.Title = "Kullanıcı Detayı";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ISPROCCESS)
+{
+
+	if (!Model.ISSUCCESSFUL)
+	{
+
+		<div class="alert alert-danger m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+			<strong>Dikkat!</strong> @Model.ERROR_MESSAGE
+		</div>
+	}
+
+}
+
+
+<div class="row justify-content-center m-b-20">
+
+
+
+	<div class="col-xl-8 order-xl-1">
+		<div class="card bg-secondary shadow">
+			<div class="card-header bg-white border-0">
+				<div class="row align-items-center">
+					<div class="col-8">
+						<h3 class="mb-0">Kullanıcı Detayı</h3>
+
+					</div>
+					<div class="col-4 text-right">
+						<a href="/User/UserList" class="btn btn-sm btn-info">Listeye Dön</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+
+
+				<h6 class="heading-small text-muted mb-3">Genel Bilgiler <span class="pull-right">Kullanıcı ID:@Model.USERS.ID</span></h6>
+				<div class="pl-lg-4 p-l-0">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label class="form-control-label" for="FULLNAME">Kullanıcı Adı</label>
+								<input type="text" disabled="disabled" id="FULLNAME" name="FULLNAME" class="form-control form-control-alternative bg-white" value="@Model.USERS.FULLNAME">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label class="form-control-label" for="PHONE">Telefon</label>
+								<input type="email" disabled="disabled" id="PHONE" name="PHONE" class="form-control form-control-alternative bg-white" value="@Model.USERS.PHONE">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label class="form-control-label" for="EMAIL">Email</label>
+								<input type="email" disabled="disabled" id="EMAIL" name="EMAIL" class="form-control form-control-alternative bg-white" value="@Model.USERS.EMAIL">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label class="form-control-label" for="PASSWORD">Şifre</label>
+								<input type="email" disabled="disabled" id="PASSWORD" name="PASSWORD" class="form-control form-control-alternative bg-white" value="@Model.USERS.PASSWORD">
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				<hr class="my-4" />
+				<!-- Address -->
+				<h6 class="heading-small text-muted mb-3">Hakkında</h6>
+				<div class="pl-lg-4 p-l-0">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="custom-control custom-control-alternative custom-checkbox">
+								@Html.CheckBox("ISACTIVE", Model.USERS.ISACTIVE, new { @class = "custom-control-input", id = "ISACTIVE", @disabled ="true" })
+							<label class="custom-control-label" for="ISACTIVE">
+								<span class="text-muted">
+									@if (Model.USERS.ISACTIVE)
+									{
+										<text>Aktif</text>
+									}
+									else
+									{
+										<text>Pasif</TEXT>	
+									}
+								</span>
+							</label>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="custom-control custom-control-alternative custom-checkbox">
+								@Html.CheckBox("ISEXECUTIVE", Model.USERS.ISEXECUTIVE, new { @class = "custom-control-input", id = "ISEXECUTIVE", @disabled = "true" })
+								<label class="custom-control-label" for="ISEXECUTIVE">
+									<span class="text-muted">
+										@if (Model.USERS.ISACTIVE)
+										{
+											<text>YÖNETİCİ</text>
+										}
+										else
+										{
+											<text>KULLANICI</TEXT>
+										}
+									</span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div> 
+				 
+
+				 
+
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+@section FooterBottom
+	{
+
+
+}
