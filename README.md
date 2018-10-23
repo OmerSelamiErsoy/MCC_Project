@@ -10,3 +10,5 @@ Projeyi ayağa kaldırmak için lütfen aşağıdaki adımları uygulayınız.
   - UnitTestProject > App.config içerisindeki "ConfigFilePath"
 4) Makinanızda "AdminPanel" projesine ait port "59091" değil ise, Upload edilen fotoğrafların projelerde görünebilmesi için 
   "Utility > Data > Settings.xml" içindeki "AdminDirectoryLocal" fileld'ını kendi makinanızdaki port ile güncelleyiniz.
+
+Yönetim paneline "yonetici@mcc.com.tr" / "123" ile giriş yapablirsiniz. 
