@@ -8,7 +8,7 @@ Projeyi ayağa kaldırmak için lütfen aşağıdaki adımları uygulayınız.
   - AdminPanel > Web.config içerisindeki "ConfigFilePath"
   - WebApplication > Web.config içerisindeki "ConfigFilePath"
   - UnitTestProject > App.config içerisindeki "ConfigFilePath"
-4) Makinanızda "AdminPanel" projesine ait port "59091" değil ise, Upload edilen fotoğrafların kullanıcı arayüzünde görünebilmesi için 
+4) Makinanızda "AdminPanel" projesine ait port "59091" değil ise, Upload edilen fotoğrafların kullanıcı arayüzünde görülebilmesi için 
   "Utility > Data > Settings.xml" içindeki "AdminDirectoryLocal" fileld'ını kendi makinanızdaki port ile güncelleyiniz.
 
 Yönetim paneline "yonetici@mcc.com.tr" / "123" ile giriş yapablirsiniz. 
