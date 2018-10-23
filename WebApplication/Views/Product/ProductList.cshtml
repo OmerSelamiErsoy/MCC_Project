@@ -1,14 +1,14 @@
 ﻿@model WebApplication.Models.Product.ProductViewModel
 @{
-    ViewBag.Title = "Ürün Listesi";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Ürün Listesi";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section id="new-arrivals" class="new-arrivals ">
 	<div class="container m-t-20 p-l-0 p-r-0">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Anasayfa</a></li>
+				<li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Ürün Listele</li>
 				@if (!String.IsNullOrEmpty(Model.SELECTEDCATEGORY))
 				{
@@ -18,9 +18,9 @@
 			</ol>
 		</nav>
 		@*<div class="section-header">
-			<h2>new arrivals</h2>
-		</div>*@
-	<!--/.section-header-->
+				<h2>new arrivals</h2>
+			</div>*@
+		<!--/.section-header-->
 		<div class="new-arrivals-content m-t-20">
 			<div class="row">
 				<div class="col-md-3 col-sm-12">
@@ -32,14 +32,14 @@
 						</li>
 						@for (int i = 0; i < Model.LIST_CATEGORIES.Count(); i++)
 						{
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="/Product/ProductList/@Model.LIST_CATEGORIES[i].ID">@Model.LIST_CATEGORIES[i].CATEGORYNAME</a>
-							<span class="badge badge-primary badge-pill">@Model.LIST_CATEGORIES[i].PRODUCTCOUNT</span>
-						</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+								<a href="/Product/ProductList/@Model.LIST_CATEGORIES[i].ID">@Model.LIST_CATEGORIES[i].CATEGORYNAME</a>
+								<span class="badge badge-primary badge-pill">@Model.LIST_CATEGORIES[i].PRODUCTCOUNT</span>
+							</li>
 						}
 					</ul>
 
-					 
+
 
 				</div>
 				<div class="col-md-9 col-sm-12">
@@ -56,7 +56,7 @@
 											<div class="new-arrival-cart">
 												<p>
 													<span class="lnr lnr-cart"></span>
-													<a href="#">Sepete Ekle</a>
+													<a href="#" onclick="AddOrUpdateBasket(@Model.LIST_PRODUCTS[i].ID, 1,0)">Sepete Ekle</a>
 												</p>
 												<p class="arrival-review pull-right">
 													<span class="lnr lnr-heart"></span>
@@ -83,11 +83,17 @@
 
 
 					</div>
-					</div>
-				
+				</div>
+
 			</div>
-			</div>
+		</div>
 	</div><!--/.container-->
 
 </section>
 
+@section FooterBottom
+	{
+
+ 
+
+}

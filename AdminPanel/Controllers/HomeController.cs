@@ -6,7 +6,7 @@ namespace AdminPanel.Controllers
 {
 	public class HomeController : Controller
 	{
-		[FilterAuthorization]
+		[FilterAuthorization, LogAction]
 		public ActionResult Index()
 		{
 			IndexViewModel Model = new IndexViewModel();

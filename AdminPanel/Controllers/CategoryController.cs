@@ -1,29 +1,30 @@
 ﻿using AdminPanel.Common;
 using AdminPanel.Models.Category;
 using AdminPanel.Models.General;
+using Log_Layer.Manager;
 using Object_Layer;
 using System;
 using System.Web.Mvc;
+using Utility.Methods;
 
 namespace AdminPanel.Controllers
 {
 	public class CategoryController : Controller
     {
 
-
-		[FilterAuthorization]
+		 
+		[FilterAuthorization(Enumeration.enum_PageID.CategoryPage), LogAction]
 		public ActionResult CategoryList()
 		{
 			CategoryViewModel Model = new CategoryViewModel();
 			Model.ISACTIVE = true;
-			Model.List_CATEGORIES = TBL_CATEGORIES.LIST(ISPRODUCTCOUNT: true);
-
+			Model.List_CATEGORIES = TBL_CATEGORIES.LIST(ISPRODUCTCOUNT: true);	    
 			return View(Model);
 		}
 
 
 		[HttpPost]
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.CategoryPage), LogAction]
 		public ActionResult CategoryList(string CATEGORYNAME, bool ISACTIVE, int UPDATEID)
 		{
 			CategoryViewModel Model = new CategoryViewModel();
@@ -49,6 +50,9 @@ namespace AdminPanel.Controllers
 					Model.ISPROCCESS = true;
 					Model.ISSUCCESSFUL = true;
 					Model.MESSAGE = CATEGORYNAME + " isimli kategori başarı ile eklenmiştir!";
+
+
+					LogManager.LogManagerStatic().LogInfo(Model.CATEGORYNAME + "isim kategori " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından eklendi.");
 				}
 				else
 				{
@@ -61,6 +65,8 @@ namespace AdminPanel.Controllers
 					Model.ISPROCCESS = true;
 					Model.ISSUCCESSFUL = true;
 					Model.MESSAGE = CATEGORYNAME + " isimli kategori başarı ile Güncellenmiştir!";
+
+					LogManager.LogManagerStatic().LogInfo(CATEGORYNAME + "isim kategori " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından güncellendi.");
 
 
 				}
@@ -82,6 +88,9 @@ namespace AdminPanel.Controllers
 
 				TBL_CATEGORIES.DELETE(ID);
 				I.ISSUCCESSFUL = true;
+
+				//Kategori fizikiolarak silinmediği için ID üzerinden db'den ulaşabiliriz.
+				LogManager.LogManagerStatic().LogInfo(ID + "IDli kategori " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından silindi.");
 
 			}
 			catch (Exception ex)

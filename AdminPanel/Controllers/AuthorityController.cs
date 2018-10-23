@@ -2,6 +2,7 @@
 using AdminPanel.Models.Login;
 using Log_Layer.Manager;
 using Object_Layer;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 
@@ -40,8 +41,8 @@ namespace AdminPanel.Controllers
 
 			if (ModelState.IsValid)
 			{
-				TBL_USERS KT = TBL_USERS.SINGLE(EMAIL: UG.EPOSTA, PASSWORD: UG.SIFRE, ISEXECUTIVE: true);
-				if (KT == null)
+				TBL_USERS _USER = TBL_USERS.SINGLE(EMAIL: UG.EPOSTA, PASSWORD: UG.SIFRE, ISEXECUTIVE: true);
+				if (_USER == null)
 				{
 					ModelState.AddModelError("", "Hatalı Eposta veya Şifre girdiniz!");
 					return View(UG);
@@ -59,11 +60,11 @@ namespace AdminPanel.Controllers
 
 					}
 
-
-					BasePage.LoginSessionAddUserAuthority(KT);
+					List<TBL_USERBLOCKLIST> _BLOCKLIST = TBL_USERBLOCKLIST.LIST(USERID: _USER.ID);
+					BasePage.LoginSessionAddUserAuthority(_USER, _BLOCKLIST);
 																										 
 
-					LogManager.LogManagerStatic().LogInfo(KT.FULLNAME + " Kullanıcısı Sisteme Giriş Yaptı");
+					LogManager.LogManagerStatic().LogInfo(_USER.FULLNAME + " Kullanıcısı Sisteme Giriş Yaptı");
 
 					 
 					return RedirectToAction("Index", "Home");

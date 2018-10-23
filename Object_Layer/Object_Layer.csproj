@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TBL_CATEGORIES.cs" />
+    <Compile Include="TBL_USERBLOCKLIST.cs" />
+    <Compile Include="TBL_PAGEOBJECTS.cs" />
+    <Compile Include="TBL_PAGES.cs" />
     <Compile Include="TBL_PRODUCTS.cs" />
     <Compile Include="TBL_USERS.cs" />
   </ItemGroup>

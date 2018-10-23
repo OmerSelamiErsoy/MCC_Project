@@ -1,0 +1,177 @@
+﻿@using Utility.Methods
+@using Object_Layer
+@model AdminPanel.Models.AdminAuthority.AdminAuthorityViewModel
+@{
+	ViewBag.Title = "Yetkilendirme Listesi";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (Model.ISPROCCESS)
+{
+<div class="alert alert-success m-l-10 m-r-10 m-t-10 m-b-20" role="alert" id="Divresult">
+	<strong>Tebrikler!</strong> @Model.USER.FULLNAME  için yetkilendirme Yapılmıştır.
+</div> 
+}
+
+<div class="row">
+	<div class="col m-b-20 p-b-20">
+		<div class="card shadow">
+			<div class="row align-items-center padding-10">
+				<div class="col-8">
+					<h3 class="mb-0">Yetkiilendirme Listesi / Seçili Kullanıcı: <span class="text-danger">@Model.USER.FULLNAME</span></h3>
+					 
+					<a href="#" class="fs-12 text-danger" onclick="cboxAllState(true)">Tümünü Seç</a> <span class="small-text"> | </span>
+					<a href="#" class="fs-12 text-danger" onclick="cboxAllState(false)">Tümünü Bırak</a>
+				</div>
+				<div class="col-4 text-right">
+					<a href="/AdminAuthority/AdminList" class="btn btn-sm btn-info">Listeye Dön</a>
+				</div>
+			</div>
+			<div>
+				@if (Model.LIST_PAGES.Count > 0)
+				{
+
+
+
+					<div class="table-responsive" id="cboxGeneral-Div">
+
+
+
+						@for (int i = 0; i < Model.LIST_PAGES.Count(); i++)
+						{
+							<table class="table align-items-center table-flush">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Sayfa Adı</th>
+										<th scope="col" class="text-center">Giriş Yetkisi</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr id="tr_@Model.LIST_PAGES[i].ID">
+										<th scope="row" class="text-primary">
+											<span class="mb-0 text-sm" id="PAGENAME_@Model.LIST_PAGES[i].ID">@Model.LIST_PAGES[i].PAGENAME</span>
+										</th>
+										<td class="text-center">
+											<div class="custom-control custom-control-alternative custom-checkbox">
+												@if (Model.LIST_USERBLOCKLIST.Exists(x => x.TYPEID == (int)Enumeration.enum_UserBlockListType.PAGE && x.PAGEID_OR_OBJECTID == Model.LIST_PAGES[i].ID))
+												{
+													<input onclick="cboxstatePage('@Model.LIST_PAGES[i].ID',false)" class="custom-control-input" data-val="true" id="ISPERMISSION_P_@Model.LIST_PAGES[i].ID" name="ISPERMISSION_P_@Model.LIST_PAGES[i].ID" type="checkbox" value="true">
+												}
+												else
+												{
+													<input checked="checked" onclick="cboxstatePage('@Model.LIST_PAGES[i].ID',false)" class="custom-control-input" data-val="true" id="ISPERMISSION_P_@Model.LIST_PAGES[i].ID" name="ISPERMISSION_P_@Model.LIST_PAGES[i].ID" type="checkbox" value="true">
+												}
+
+
+												<label class="custom-control-label" for="ISPERMISSION_P_@Model.LIST_PAGES[i].ID">
+													<span class="text-muted">
+														Bu sayfaya girebilir
+													</span>
+												</label>
+											</div>
+										</td>
+									</tr>
+
+									@if (Model.LIST_PAGEOBJECTS.Exists(x => x.PAGEID == Model.LIST_PAGES[i].ID))
+									{
+										List<TBL_PAGEOBJECTS> LIST_PAGEOBJECTS_TEMP = Model.LIST_PAGEOBJECTS.Where(x => x.PAGEID == Model.LIST_PAGES[i].ID).ToList();
+
+										<tr id="tr_O_@Model.LIST_PAGES[i].ID">
+											<td colspan="2" class="bg-white">
+
+												<table class="table align-items-center table-flush">
+													<thead class="thead-orange">
+														<tr>
+															<th scope="col">Sayfaya Ait Nesne Adı</th>
+															<th scope="col" class="text-center">Giriş Yetkisi</th>
+														</tr>
+													</thead>
+													<tbody>
+														@for (int ix = 0; ix < LIST_PAGEOBJECTS_TEMP.Count(); ix++)
+														{
+															<tr id="trn_@LIST_PAGEOBJECTS_TEMP[ix].ID">
+																<th scope="row" class="text-danger">
+																	<span class="mb-0 text-sm" id="PAGENAME_@LIST_PAGEOBJECTS_TEMP[ix].ID">@LIST_PAGEOBJECTS_TEMP[ix].OBJECTNAME</span>
+																</th>
+																<td class="text-center">
+																	<div class="custom-control custom-control-alternative custom-checkbox">
+																		@if (Model.LIST_USERBLOCKLIST.Exists(x => x.TYPEID == (int)Enumeration.enum_UserBlockListType.PAGEOBJECT && x.PAGEID_OR_OBJECTID == LIST_PAGEOBJECTS_TEMP[ix].ID))
+																		{
+																		<input  onclick="cboxstatePageObject(@Model.LIST_PAGES[i].ID,@LIST_PAGEOBJECTS_TEMP[ix].ID)" class="custom-control-input" data-val="true" id="ISPERMISSION_O_@LIST_PAGEOBJECTS_TEMP[ix].ID" name="ISPERMISSION_O_@LIST_PAGEOBJECTS_TEMP[ix].ID" type="checkbox" value="true">
+																		}
+																		else
+																		{
+																			<input checked="checked" onclick="cboxstatePageObject(@Model.LIST_PAGES[i].ID,@LIST_PAGEOBJECTS_TEMP[ix].ID)" class="custom-control-input" data-val="true" id="ISPERMISSION_O_@LIST_PAGEOBJECTS_TEMP[ix].ID" name="ISPERMISSION_O_@LIST_PAGEOBJECTS_TEMP[ix].ID" type="checkbox" value="true">
+																		}
+																		
+																		<label class="custom-control-label" for="ISPERMISSION_O_@LIST_PAGEOBJECTS_TEMP[ix].ID">
+																			<span class="text-muted">
+																				Bu işlemi yapabilir
+																			</span>
+																		</label>
+																	</div>
+																</td>
+															</tr>
+
+														}
+													</tbody>
+												</table>
+
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+
+							<br />
+						}
+
+
+
+
+					</div>
+					<hr class="my-4" />
+					<!-- Description -->
+					<div class="pl-lg-4">
+						<div class="form-group text-center">
+							@OSEHtmlControl.myButton("btnSave", "button", "KAYDET", Enumeration.enum_myButtonType.SUCCESS)
+
+
+							@using (Html.BeginForm("PageObjectList", "AdminAuthority", FormMethod.Post, new { id = "formBlockList" }))
+							{
+								<input type="hidden" name="USERID" id="USERID" value="@Model.USER.ID">
+								<input type="hidden" name="SelectedBlockList" id="SelectedBlockList" value="">
+							}
+
+						</div>
+					</div>
+
+
+
+				}
+				else
+				{
+					<div class="alert alert-default m-l-10 m-r-10 m-t-10 m-b-20" role="alert">
+						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir sayfa bulunmuyor!
+					</div>
+				}
+
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+@section FooterBottom
+    {
+
+<script src="/DesingComponent/pageJS/AdminAuthority.js"></script>
+	 
+
+}
+

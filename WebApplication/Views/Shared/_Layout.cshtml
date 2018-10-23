@@ -1,4 +1,5 @@
 ﻿@using Utility.Methods
+@using WebApplication.Common
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -34,10 +35,10 @@
 	<!--style.css-->
 	<link rel="stylesheet" href="/theme/assets/css/style.css">
 
+	<link href="/DesingComponent/CustomCSS.css" rel="stylesheet" />
+
 	<!--responsive.css-->
 	<link rel="stylesheet" href="/theme/assets/css/responsive.css">
-
-	<link href="/DesingComponent/CustomCSS.css" rel="stylesheet" />
 
 	<link href="/DesingComponent/customConfirm/jquery-confirm.css" rel="stylesheet" />
 	<!--[if lt IE 9]>
@@ -47,65 +48,62 @@
 </head>
 
 <body>
-	<!--[if lte IE 9]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-	<![endif]-->
-	<!--welcome-hero start -->
+ 
+	 
 	<header id="home" class="">
 
-		<!-- top-area Start -->
+		 
 		<div class="top-area">
 			<div class="header-area">
-				<!-- Start Navigation -->
+
+				 
 				<nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-					<!-- Start Top Search -->
-					<!-- End Top Search -->
+				 
 					<div class="container">
-						<!-- Start Atribute Navigation -->
+						 
 						<div class="attr-nav">
 							<ul>
 
 								<li class="nav-setting">
 									<a href="@ConfigManager.AdminDirectory"><span class="lnr lnr-cog"></span></a>
-								</li><!--/.search-->
+								</li> 
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="lnr lnr-cart"></span>
-										<span class="badge badge-bg-1">2</span>
-									</a>
+									 
+									@Html.Partial("_partialBasketCount")
 
-								</li><!--/.dropdown-->
+								</li>
 							</ul>
-						</div><!--/.attr-nav-->
-						<!-- End Atribute Navigation -->
-						<!-- Start Header Navigation -->
+						</div>
+						 
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 								<i class="fa fa-bars"></i>
 							</button>
-							<a class="navbar-brand" href="index.html">MCC-WEB</a>
-						</div><!--/.navbar-header-->
-						<!-- End Header Navigation -->
-						<!-- Collect the nav links, forms, and other content for toggling -->
+							<a class="navbar-brand" href="/Home/Index">MCC-WEB</a>
+						</div> 
 						<div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 							<ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
 								<li class="scroll active"><a href="/Home/Index">Anasayfa</a></li>
 								<li class="scroll"><a href="/Product/ProductList">Ürünler</a></li>
-								@*<li class="scroll"><a href="#blog">blog</a></li>
-									<li class="scroll"><a href="#newsletter">İletişim</a></li>*@
-							</ul><!--/.nav -->
-						</div><!-- /.navbar-collapse -->
-					</div><!--/.container-->
-				</nav><!--/nav-->
-				<!-- End Navigation -->
-			</div><!--/.header-area-->
+							 
+							</ul>
+						</div>
+						<div class="alert alert-warning text-center" role="alert" style="display: none;z-index:2000;" id="GeneralLoader">
+							Lütfen bekleyiniz, işlem yapılıyor...
+						</div>
+					</div>
+				</nav>
+				
+
+			</div>
 			<div class="clearfix"></div>
-		</div><!-- /.top-area-->
-		<!-- top-area End -->
-	</header><!--/.welcome-hero-->
-	<!--welcome-hero end -->
+		</div>
+		
+	</header>
+	
+	
 	@RenderBody()
-	<!-- clients strat -->
+	
 	<section id="clients" class="clients">
 		<div class="container">
 			<div class="owl-carousel owl-theme" id="client">
@@ -113,32 +111,32 @@
 					<a href="#">
 						<img src="/theme/assets/images/clients/c1.png" alt="brand-image" />
 					</a>
-				</div><!--/.item-->
+				</div>
 				<div class="item">
 					<a href="#">
 						<img src="/theme/assets/images/clients/c2.png" alt="brand-image" />
 					</a>
-				</div><!--/.item-->
+				</div>
 				<div class="item">
 					<a href="#">
 						<img src="/theme/assets/images/clients/c3.png" alt="brand-image" />
 					</a>
-				</div><!--/.item-->
+				</div>
 				<div class="item">
 					<a href="#">
 						<img src="/theme/assets/images/clients/c4.png" alt="brand-image" />
 					</a>
-				</div><!--/.item-->
+				</div>
 				<div class="item">
 					<a href="#">
 						<img src="/theme/assets/images/clients/c5.png" alt="brand-image" />
 					</a>
-				</div><!--/.item-->
-			</div><!--/.owl-carousel-->
-		</div><!--/.container-->
-	</section><!--/.clients-->
-	<!-- clients end -->
-	<!--newsletter strat -->
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
 	<section id="newsletter" class="newsletter">
 		<div class="container">
 			<div class="hm-footer-details">
@@ -146,76 +144,66 @@
 					<div class=" col-md-3 col-sm-6 col-xs-12">
 						<div class="hm-footer-widget">
 							<div class="hm-foot-title">
-								<h4>information</h4>
-							</div><!--/.hm-foot-title-->
+								<h4>Bilgi</h4>
+							</div>
 							<div class="hm-foot-menu">
 								<ul>
-									<li><a href="#">about us</a></li><!--/li-->
-									<li><a href="#">contact us</a></li><!--/li-->
-									<li><a href="#">news</a></li><!--/li-->
-									<li><a href="#">store</a></li><!--/li-->
-								</ul><!--/ul-->
-							</div><!--/.hm-foot-menu-->
-						</div><!--/.hm-footer-widget-->
-					</div><!--/.col-->
+									<li><a href="#">Hakkımızda</a></li>
+									<li><a href="#">İletişim</a></li>
+									<li><a href="#">Haberler</a></li>
+									<li><a href="#">Mağaza</a></li>
+								</ul> 
+							</div> 
+						</div> 
+					</div >
 					<div class=" col-md-3 col-sm-6 col-xs-12">
 						<div class="hm-footer-widget">
 							<div class="hm-foot-title">
-								<h4>collections</h4>
-							</div><!--/.hm-foot-title-->
+								<h4>Bilgi</h4>
+							</div>
 							<div class="hm-foot-menu">
 								<ul>
-									<li><a href="#">wooden chair</a></li><!--/li-->
-									<li><a href="#">royal cloth sofa</a></li><!--/li-->
-									<li><a href="#">accent chair</a></li><!--/li-->
-									<li><a href="#">bed</a></li><!--/li-->
-									<li><a href="#">hanging lamp</a></li><!--/li-->
-								</ul><!--/ul-->
-							</div><!--/.hm-foot-menu-->
-						</div><!--/.hm-footer-widget-->
-					</div><!--/.col-->
-					<div class=" col-md-3 col-sm-6 col-xs-12">
-						<div class="hm-footer-widget">
-							<div class="hm-foot-title">
-								<h4>my accounts</h4>
-							</div><!--/.hm-foot-title-->
-							<div class="hm-foot-menu">
-								<ul>
-									<li><a href="#">my account</a></li><!--/li-->
-									<li><a href="#">wishlist</a></li><!--/li-->
-									<li><a href="#">Community</a></li><!--/li-->
-									<li><a href="#">order history</a></li><!--/li-->
-									<li><a href="#">my cart</a></li><!--/li-->
-								</ul><!--/ul-->
-							</div><!--/.hm-foot-menu-->
-						</div><!--/.hm-footer-widget-->
-					</div><!--/.col-->
-					<div class=" col-md-3 col-sm-6  col-xs-12">
-						<div class="hm-footer-widget">
-							<div class="hm-foot-title">
-								<h4>newsletter</h4>
-							</div><!--/.hm-foot-title-->
-							<div class="hm-foot-para">
-								<p>
-									Subscribe  to get latest news,update and information.
-								</p>
-							</div><!--/.hm-foot-para-->
-							<div class="hm-foot-email">
-								<div class="foot-email-box">
-									<input type="text" class="form-control" placeholder="Enter Email Here....">
-								</div><!--/.foot-email-box-->
-								<div class="foot-email-subscribe">
-									<span><i class="fa fa-location-arrow"></i></span>
-								</div><!--/.foot-email-icon-->
-							</div><!--/.hm-foot-email-->
-						</div><!--/.hm-footer-widget-->
-					</div><!--/.col-->
-				</div><!--/.row-->
-			</div><!--/.hm-footer-details-->
-		</div><!--/.container-->
-	</section><!--/newsletter-->
-	<!--newsletter end -->
-	<!--footer start-->
+									<li><a href="#">Hakkımızda</a></li>
+									<li><a href="#">İletişim</a></li>
+									<li><a href="#">Haberler</a></li>
+									<li><a href="#">Mağaza</a></li>
+								</ul>
+							</div>
+						</div>
+					</div><div class=" col-md-3 col-sm-6 col-xs-12">
+	<div class="hm-footer-widget">
+		<div class="hm-foot-title">
+			<h4>Bilgi</h4>
+		</div>
+		<div class="hm-foot-menu">
+			<ul>
+				<li><a href="#">Hakkımızda</a></li>
+				<li><a href="#">İletişim</a></li>
+				<li><a href="#">Haberler</a></li>
+				<li><a href="#">Mağaza</a></li>
+			</ul>
+		</div>
+	</div>
+</div><div class=" col-md-3 col-sm-6 col-xs-12">
+	<div class="hm-footer-widget">
+		<div class="hm-foot-title">
+			<h4>Bilgi</h4>
+		</div>
+		<div class="hm-foot-menu">
+			<ul>
+				<li><a href="#">Hakkımızda</a></li>
+				<li><a href="#">İletişim</a></li>
+				<li><a href="#">Haberler</a></li>
+				<li><a href="#">Mağaza</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+				</div> 
+			</div> 
+		</div> 
+	</section> 
+	 
 	<footer id="footer" class="footer">
 		<div class="container">
 			<div class="hm-footer-copyright text-center">
@@ -226,21 +214,20 @@
 					<a href="#"><i class="fa fa-pinterest"></i></a>
 					<a href="#"><i class="fa fa-behance"></i></a>
 				</div>
-				<p>
-					&copy;copyright. designed and developed by <a href="https://www.themesine.com/">themesine</a>
-				</p><!--/p-->
-			</div><!--/.text-center-->
-		</div><!--/.container-->
+				 
+			</div> 
+
+		</div> 
 		<div id="scroll-Top">
 			<div class="return-to-top">
 				<i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
 			</div>
 
-		</div><!--/.scroll-Top-->
+		</div>
 
-	</footer><!--/.footer-->
-	<!--footer end-->
-	<!-- Include all js compiled plugins (below), or include individual files as needed -->
+	</footer>
+	 
+ 
 	<script src="/theme/assets/js/jquery.js"></script>
 
 	<!--modernizr.min.js-->
@@ -260,9 +247,12 @@
 	<!--Custom JS-->
 	<script src="/theme/assets/js/custom.js"></script>
 
-	<script src="/DesingComponent/CustomJS.js"></script> 
+	<script src="/DesingComponent/CustomJS.js"></script>
 
 	<script src="/DesingComponent/customConfirm/jquery-confirm.js"></script>
+
+	<script src="/DesingComponent/GeneralBasket.js"></script>
+
 
 	@RenderSection("FooterBottom", false)
 </body>

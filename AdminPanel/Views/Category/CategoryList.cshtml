@@ -1,4 +1,5 @@
 ﻿@using Utility.Methods
+@using AdminPanel.Common
 @model AdminPanel.Models.Category.CategoryViewModel
 
 @{
@@ -26,70 +27,80 @@
 
 }
 
+@{
 
+	Model.ISINSERT_BLOCK = FilterAuthorization.ObjectControl(1);
+	Model.ISUPDATE_BLOCK = FilterAuthorization.ObjectControl(2);
+	Model.ISDELETE_BLOCK = FilterAuthorization.ObjectControl(3);
 
-<div class="row m-b-20" id="divNewCategory" style="display:@addCatDisplay">
-	<div class="col-12">
-		<div class="row justify-content-center">
+}
 
-			<div class="col-12 col-sm-6 ">
-				<div class="card bg-secondary shadow">
-					<div class="card-header bg-white border-0">
-						<div class="row align-items-center">
-							<div class="col-8">
-								<h3 class="mb-0">Kategori <span id="divProccessTitle">Ekle</span></h3>
+@if (Model.ISINSERT_BLOCK || Model.ISUPDATE_BLOCK)
+{
+		<div class="row m-b-20" id="divNewCategory" style="display:@addCatDisplay">
+			<div class="col-12">
+				<div class="row justify-content-center">
+
+					<div class="col-12 col-sm-6 ">
+						<div class="card bg-secondary shadow">
+							<div class="card-header bg-white border-0">
+								<div class="row align-items-center">
+									<div class="col-8">
+										<h3 class="mb-0">Kategori <span id="divProccessTitle">Ekle</span></h3>
+									</div>
+									<div class="col-4 text-right">
+										<a href="#" id="close" class="btn btn-sm btn-danger">Kapat</a>
+									</div>
+								</div>
 							</div>
-							<div class="col-4 text-right">
-								<a href="#" id="close" class="btn btn-sm btn-danger">Kapat</a>
+							<div class="card-body">
+								@using (Html.BeginForm("CategoryList", "Category", FormMethod.Post, new { id = "formAdd" }))
+								{
+
+									<input type="hidden" name="UPDATEID" id="UPDATEID" value="1" />
+									<div class="pl-lg-4 p-l-0">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label class="form-control-label" for="input-username">Kategori Adı</label>
+													<input type="text" id="CATEGORYNAME" name="CATEGORYNAME" class="form-control form-control-alternative" placeholder="Kategori Adı Giriniz" value="">
+												</div>
+											</div>
+											<div class="col-lg-12">
+												<div class="custom-control custom-control-alternative custom-checkbox">
+													@Html.CheckBox("ISACTIVE", Model.ISACTIVE, new { @class = "custom-control-input", id = "ISACTIVE" })
+													<label class="custom-control-label" for="ISACTIVE">
+														<span class="text-muted">AKTİF</span>
+													</label>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<hr class="my-4" />
+									<!-- Description -->
+									<div class="pl-lg-4">
+										<div class="form-group text-center m-b-0">
+											@OSEHtmlControl.myButton("btnAddCategory", "button", "KAYDET", Enumeration.enum_myButtonType.SUCCESS)
+										</div>
+									</div>
+								}
+
+
 							</div>
 						</div>
 					</div>
-					<div class="card-body">
-						@using (Html.BeginForm("CategoryList", "Category", FormMethod.Post, new { id = "formAdd" }))
-						{
-
-							<input type="hidden" name="UPDATEID" id="UPDATEID" value="1" />
-							<div class="pl-lg-4 p-l-0">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<label class="form-control-label" for="input-username">Kategori Adı</label>
-											<input type="text" id="CATEGORYNAME" name="CATEGORYNAME" class="form-control form-control-alternative" placeholder="Kategori Adı Giriniz" value="">
-										</div>
-									</div>
-									<div class="col-lg-12">
-										<div class="custom-control custom-control-alternative custom-checkbox">
-											@Html.CheckBox("ISACTIVE", Model.ISACTIVE, new { @class = "custom-control-input", id = "ISACTIVE" })
-											<label class="custom-control-label" for="ISACTIVE">
-												<span class="text-muted">AKTİF</span>
-											</label>
-										</div>
-									</div>
-								</div>
-
-							</div>
-							<hr class="my-4" />
-							<!-- Description -->
-							<div class="pl-lg-4">
-								<div class="form-group text-center m-b-0">
-									@OSEHtmlControl.myButton("btnAddCategory", "button", "KAYDET", Enumeration.myButtonType.SUCCESS)
-								</div>
-							</div>
-						}
 
 
-					</div>
 				</div>
+
+
+
 			</div>
 
-
 		</div>
+}
 
-
-
-	</div>
-
-</div>
 <div class="row">
 	<div class="col">
 		<div class="card shadow">
@@ -98,7 +109,11 @@
 					<h3 class="mb-0">Kategori Listesi</h3>
 				</div>
 				<div class="col-4 text-right">
-					<a href="#" id="btnnew" class="btn btn-sm btn-primary">Yeni Ekle</a>
+					@if (Model.ISINSERT_BLOCK)
+					{
+						<a href="#" id="btnnew" class="btn btn-sm btn-primary">Yeni Ekle</a>
+					}
+
 				</div>
 			</div>
 			<div>
@@ -154,8 +169,16 @@
 											@Model.List_CATEGORIES[i].CREATEUSERNAME
 										</td>
 										<td class="text-right">
-											<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_CATEGORIES[i].ID)">SİL</button>
-											<button type="button" class="btn btn-warning btn-sm" onclick="UPDATE(@Model.List_CATEGORIES[i].ID)">GÜNCELLE</button>
+
+											@if (Model.ISDELETE_BLOCK)
+											{
+												<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_CATEGORIES[i].ID)">SİL</button>
+											}
+											@if (Model.ISUPDATE_BLOCK)
+											{
+												<button type="button" class="btn btn-warning btn-sm" onclick="UPDATE(@Model.List_CATEGORIES[i].ID)">GÜNCELLE</button>
+											}
+											
 										</td>
 									</tr>
 								}

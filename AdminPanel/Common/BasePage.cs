@@ -11,6 +11,7 @@ namespace AdminPanel.Common
 	public class BasePage
 	{
 		static string SessionAuthorityName = "UserAuthority";
+		static string SessionAuthorityBlockListName = "UserAuthorityBlockList";
 
 		public static TBL_USERS LoginUserInf
 		{
@@ -28,17 +29,35 @@ namespace AdminPanel.Common
 			}
 		}
 
+		public static List<TBL_USERBLOCKLIST> LoginUserBlockList
+		{
+			get
+			{
+				if (HttpContext.Current.Session[SessionAuthorityBlockListName] == null)
+				{
+					return null;
+				}
+				else
+				{
+					return (List<TBL_USERBLOCKLIST>)HttpContext.Current.Session[SessionAuthorityBlockListName];
+				}
+
+			}
+		}
+
 		public static void LoginSessionUpdate(TBL_USERS USERINF)
 		{
 			HttpContext.Current.Session[SessionAuthorityName] = USERINF;
 		}
-		public static void LoginSessionAddUserAuthority(TBL_USERS USERINF)
+		public static void LoginSessionAddUserAuthority(TBL_USERS USERINF,List<TBL_USERBLOCKLIST> USERBLOCKLIST)
 		{
 			HttpContext.Current.Session[SessionAuthorityName] = USERINF;
+			HttpContext.Current.Session[SessionAuthorityBlockListName] = USERBLOCKLIST;
 		}
 		public static void LoginSessionDelUserAuthority()
 		{
 			HttpContext.Current.Session[SessionAuthorityName] = null;
+			HttpContext.Current.Session[SessionAuthorityBlockListName] = null;
 		}
 
 

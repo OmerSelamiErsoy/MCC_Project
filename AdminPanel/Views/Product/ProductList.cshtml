@@ -1,9 +1,72 @@
 ﻿@using Utility.Methods
+@using AdminPanel.Common
 @model AdminPanel.Models.Product.ProductViewModel
 @{
 	ViewBag.Title = "Ürün Listesi";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+@{
+
+	Model.ISINSERT_BLOCK = FilterAuthorization.ObjectControl(4);
+	Model.ISUPDATE_BLOCK = FilterAuthorization.ObjectControl(5);
+	Model.ISDELETE_BLOCK = FilterAuthorization.ObjectControl(6);
+
+}
+
+<div class="row m-b-20">
+	<div class="col-12">
+		<div class="row justify-content-center">
+
+			<div class="col-12 col-sm-12 ">
+				<div class="card bg-secondary shadow">
+
+					<div class="card-body p-t-10 p-b-0">
+						@using (Html.BeginForm("ProductList", "Product", FormMethod.Post))
+						{
+
+							<input type="hidden" name="UPDATEID" id="UPDATEID" value="1" />
+							<div class="pl-lg-4 p-l-0">
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="form-control-label" for="input-username">Ürün Adı</label>
+											<input type="text" id="PRODUCTNAME" name="PRODUCTNAME" class="form-control form-control-alternative" placeholder="Ürün Adı" value="@Model.PRODUCTNAME">
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="form-control-label" for="input-username">Kategori Adı</label>
+											@Html.HiddenFor(model => model.CATEGORYID)
+											@Html.MyDropDownList("ddlCATEGORYID", Model.List_CATEGORIES, "Lütfen Kategori Seçiniz", Model.CATEGORYID, "form-control form-control-alternative")
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="custom-control custom-control-alternative custom-checkbox">
+											@OSEHtmlControl.myButton("btnAddCategory", "submit", "FİLTRELE", Enumeration.enum_myButtonType.DEFAULT, "m-t-30")
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						}
+
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+	</div>
+
+</div>
+
 
 <div class="row">
 	<div class="col">
@@ -13,7 +76,11 @@
 					<h3 class="mb-0">Ürün Listesi</h3>
 				</div>
 				<div class="col-4 text-right">
-					<a href="/Product/ProductInsertOrUpdate" class="btn btn-sm btn-primary">Yeni Ekle</a>
+					@if (Model.ISINSERT_BLOCK)
+					{
+						<a href="/Product/ProductInsertOrUpdate" class="btn btn-sm btn-primary">Yeni Ekle</a>
+					}
+
 				</div>
 			</div>
 			<div>
@@ -81,8 +148,15 @@
 											@Model.List_PRODUCTS[i].CREATEUSERNAME
 										</td>
 										<td class="text-right">
-											<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_PRODUCTS[i].ID)">SİL</button>
-											<a class="btn btn-warning btn-sm" href="/Product/ProductInsertOrUpdate/@Model.List_PRODUCTS[i].ID">GÜNCELLE</a>
+											@if (Model.ISDELETE_BLOCK)
+											{
+												<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_PRODUCTS[i].ID)">SİL</button>
+											}
+											@if (Model.ISUPDATE_BLOCK)
+											{
+												<a class="btn btn-warning btn-sm" href="/Product/ProductInsertOrUpdate/@Model.List_PRODUCTS[i].ID">GÜNCELLE</a>
+											}
+
 											<a class="btn btn-info btn-sm" href="/Product/ProductDetail/@Model.List_PRODUCTS[i].ID">DETAY</a>
 										</td>
 									</tr>
@@ -139,9 +213,15 @@
 
 @section FooterBottom
 	{
-	 
+
 
 	<script src="~/DesingComponent/pageJS/Product.js"></script>
+
+	<script>
+
+		ddlSelectedValueWriteHidden("ddlCATEGORYID", "CATEGORYID");
+
+	</script>
 
 }
 

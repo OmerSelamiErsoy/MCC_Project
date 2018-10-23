@@ -89,10 +89,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesingComponent\GeneralBasket.js" />
     <Content Include="DesingComponent\customConfirm\jquery-confirm.css" />
     <Content Include="DesingComponent\customConfirm\jquery-confirm.js" />
     <Content Include="DesingComponent\CustomCSS.css" />
     <Content Include="DesingComponent\CustomJS.js" />
+    <Content Include="DesingComponent\pageJS\Basket.js" />
+    <Content Include="DesingComponent\pageJS\ProdctDetail.js" />
     <Content Include="Global.asax" />
     <Content Include="theme\assets\css\animate.css" />
     <Content Include="theme\assets\css\bootsnav.css" />
@@ -154,7 +157,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Abstract\IResultState.cs" />
+    <Compile Include="Models\Basket\BasketViewModel.cs" />
     <Compile Include="Models\General\TransactionStatus.cs" />
+    <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Product\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,6 +184,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Shared\_partialBasketCount.cshtml" />
+    <Content Include="Views\Basket\BasketList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -188,7 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Basket\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Log_Layer\Log_Layer.csproj">

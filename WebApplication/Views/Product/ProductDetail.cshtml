@@ -8,7 +8,7 @@
 	<div class="container m-t-20 p-l-0 p-r-0">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Anasayfa</a></li>
+				<li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
 				<li class="breadcrumb-item"><a href="/Product/ProductList">Ürün Listele</a></li>
 				<li class="breadcrumb-item"><a href="/Product/ProductList/@Model.PRODUCTS.CATEGORYID">@Model.PRODUCTS.CATEGORYNAME</a></li>
 				<li class="breadcrumb-item active" aria-current="page">@Model.PRODUCTS.PRODUCTNAME</li>
@@ -38,13 +38,14 @@
 												<h2>
 													<a href="#">
 														@Model.PRODUCTS.PRODUCTNAME
+														<input type="hidden" id="ID" value="@Model.PRODUCTS.ID" />
 													</a>
 												</h2>
 												<p>
 													Edi ut perspiciatis unde omnis iste natusina error sit voluptatem accusantium doloret mque laudantium, totam rem aperiam.
 												</p>
 												<div class="populer-products-price">
-													<h4>Satış fiyatı (KDV Dahil) <span>@String.Format("{0:0,0.00}", Model.PRODUCTS.PRICE) ₺</span></h4>
+													<h4>Birim satış fiyatı (KDV Dahil) <span>@String.Format("{0:0,0.00}", Model.PRODUCTS.PRICE) ₺</span></h4>
 												</div>
 												@*<div class="populer-products-price">
 														<h4> (KDV Hariç) <span>@String.Format("{0:0,0.00}", Model.PRODUCTS.PRICETAXWITHOUT) ₺</span></h4>
@@ -95,49 +96,8 @@
 @section FooterBottom
 	{
 
-
- <script>
-
-
-	 $("#btnAddBasket").click(function () {
-
-		 
-		 var _BasketAmount = $("#BasketAmount").val().replace(',', '.'); 
-
-		 
-		 if (_BasketAmount == "" || parseInt(_BasketAmount) <= 0) {
-			 alertDikkat("Lütfen Adet Belirtiniz!")
-			 return;
-		 }
+<script src="/DesingComponent/pageJS/ProdctDetail.js"></script>
  
-
-
-		 $.confirm({
-			 title: 'DİKKAT!',
-			 content: 'İşlemi Yapmak İstediğinize Emin Misiniz?',
-			 buttons: {
-				 EVET: {
-					 btnClass: 'btn-green',
-					 action: function () {
-
-
-						 
-
-
-
-					 }
-				 },
-				 HAYIR: {
-					 btnClass: 'btn-red',
-					 action: function () {
-						 //$.alert('Canceled!');
-					 }
-				 }
-			 }
-		 });
-
-	 });
-	</script>
 
 }
 

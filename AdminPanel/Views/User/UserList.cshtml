@@ -1,10 +1,18 @@
 ﻿@using Utility.Methods
+@using AdminPanel.Common
 @model AdminPanel.Models.User.UserViewModel
 @{
 	ViewBag.Title = "Kullanıcı Listesi";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+
+	Model.ISINSERT_BLOCK = FilterAuthorization.ObjectControl(7);
+	Model.ISUPDATE_BLOCK = FilterAuthorization.ObjectControl(8);
+	Model.ISDELETE_BLOCK = FilterAuthorization.ObjectControl(9);
+
+}
 <div class="row">
 	<div class="col">
 		<div class="card shadow">
@@ -13,7 +21,11 @@
 					<h3 class="mb-0">Kullanıcı Listesi</h3>
 				</div>
 				<div class="col-4 text-right">
-					<a href="/User/UserInsertOrUpdate" class="btn btn-sm btn-primary">Yeni Ekle</a>
+					@if (Model.ISINSERT_BLOCK)
+					{
+						<a href="/User/UserInsertOrUpdate" class="btn btn-sm btn-primary">Yeni Ekle</a>
+					}
+
 				</div>
 			</div>
 			<div>
@@ -41,62 +53,69 @@
 
 								@for (int i = 0; i < Model.List_USERS.Count(); i++)
 								{
-								<tr id="tr_@Model.List_USERS[i].ID">
-									<th scope="row">
-										<span class="mb-0 text-sm" id="FULLNAME_@Model.List_USERS[i].ID">@Model.List_USERS[i].FULLNAME</span>
+									<tr id="tr_@Model.List_USERS[i].ID">
+										<th scope="row">
+											<span class="mb-0 text-sm" id="FULLNAME_@Model.List_USERS[i].ID">@Model.List_USERS[i].FULLNAME</span>
 
-									</th>
-									<td class="text-center">
-										@Model.List_USERS[i].EMAIL
-									</td>
-									<td class="text-center">
-										@Model.List_USERS[i].PHONE
-									</td>
-									<td class="text-center">
+										</th>
+										<td class="text-center">
+											@Model.List_USERS[i].EMAIL
+										</td>
+										<td class="text-center">
+											@Model.List_USERS[i].PHONE
+										</td>
+										<td class="text-center">
 
-										@if (Model.List_USERS[i].ISEXECUTIVE)
-										{
-											<span class="badge badge-dot mr-4">
-												<i class="bg-success"></i> Evet
-											</span>
-										}
-										else
-										{
-											<span class="badge badge-dot mr-4">
-												<i class="bg-warning"></i> Hayır
-											</span>
-										}
+											@if (Model.List_USERS[i].ISEXECUTIVE)
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-success"></i> Evet
+												</span>
+											}
+											else
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-warning"></i> Hayır
+												</span>
+											}
 
-									</td>
-									<td class="text-center">
+										</td>
+										<td class="text-center">
 
-										@if (Model.List_USERS[i].ISACTIVE)
-										{
-											<span class="badge badge-dot mr-4">
-												<i class="bg-success"></i> Aktif
-											</span>
-										}
-										else
-										{
-											<span class="badge badge-dot mr-4">
-												<i class="bg-warning"></i> Pasif
-											</span>
-										}
+											@if (Model.List_USERS[i].ISACTIVE)
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-success"></i> Aktif
+												</span>
+											}
+											else
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-warning"></i> Pasif
+												</span>
+											}
 
-										<input type="hidden" id="ISACTIVE_@Model.List_USERS[i].ID" value="@Model.List_USERS[i].ISACTIVE" />
-									</td>
-									<td class="text-center">
-										@Model.List_USERS[i].CREATEUSERNAME
-									</td>
-									<td class="text-center">
-										@String.Format("{0:dd/MM/yyyy}", Model.List_USERS[i].CREATEDATE)
-									</td>
-									<td class="text-right">
-										<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_USERS[i].ID)">SİL</button>
-										<a class="btn btn-warning btn-sm" href="/User/UserInsertOrUpdate/@Model.List_USERS[i].ID">GÜNCELLE</a>
-										<a class="btn btn-info btn-sm" href="/User/UserDetail/@Model.List_USERS[i].ID">DETAY</a>
-									</td>
-								</tr>
+											<input type="hidden" id="ISACTIVE_@Model.List_USERS[i].ID" value="@Model.List_USERS[i].ISACTIVE" />
+										</td>
+										<td class="text-center">
+											@Model.List_USERS[i].CREATEUSERNAME
+										</td>
+										<td class="text-center">
+											@String.Format("{0:dd/MM/yyyy}", Model.List_USERS[i].CREATEDATE)
+										</td>
+										<td class="text-right">
+											@if (Model.ISDELETE_BLOCK)
+											{
+												<button type="button" class="btn btn-danger btn-sm" onclick="DELETE(@Model.List_USERS[i].ID)">SİL</button>
+											}
+											@if (Model.ISUPDATE_BLOCK)
+											{
+												<a class="btn btn-warning btn-sm" href="/User/UserInsertOrUpdate/@Model.List_USERS[i].ID">GÜNCELLE</a>
+											}
+
+											<a class="btn btn-info btn-sm" href="/User/UserDetail/@Model.List_USERS[i].ID">DETAY</a>
+										</td>
+									</tr>
 								}
 
 
@@ -136,7 +155,7 @@
 				else
 				{
 					<div class="alert alert-default m-l-10 m-r-10 m-t-10 m-b-20" role="alert">
-						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir ürün bulunmuyor! Lütfen Ekleyiniz.
+						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir kullanıcı bulunmuyor! Lütfen Ekleyiniz.
 					</div>
 				}
 

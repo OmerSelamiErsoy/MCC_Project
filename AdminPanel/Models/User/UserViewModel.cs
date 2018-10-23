@@ -1,13 +1,10 @@
 ﻿using AdminPanel.Models.Abstract;
 using Object_Layer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace AdminPanel.Models.User
 {
-	public class UserViewModel	: IResultState
+	public class UserViewModel	: IResultState,IObjectState
 	{
 		public List<TBL_USERS> List_USERS { get; set; }
 								 
@@ -17,5 +14,9 @@ namespace AdminPanel.Models.User
 		public bool ISSUCCESSFUL { get; set; }
 		public string MESSAGE { get; set; }
 		public string ERROR_MESSAGE { get; set; }
+
+		public bool ISINSERT_BLOCK { get; set; } = false;
+		public bool ISUPDATE_BLOCK { get; set; } = false;
+		public bool ISDELETE_BLOCK { get; set; } = false;
 	}
 }

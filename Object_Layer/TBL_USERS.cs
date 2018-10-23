@@ -34,21 +34,22 @@ namespace Object_Layer
 			return _dbEntityManager.Update<TBL_USERS>(ObjectList, sp_UPDATE, PrimaryKeyName);
 		}
 
-		public static List<TBL_USERS> LIST(int? ID = null, string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null, bool? ISACTIVE = null)
+		public static List<TBL_USERS> LIST(int? ID = null, string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null, bool? ISACTIVE = null, int? TOPNUMBER = null)
 		{
 			SqlParameter[] Param = {
 									new SqlParameter("@ID", ID),
 									new SqlParameter("@EMAIL", EMAIL) ,
 									new SqlParameter("@PASSWORD", PASSWORD)   ,
 									new SqlParameter("@ISEXECUTIVE", ISEXECUTIVE)   ,
-									new SqlParameter("@ISACTIVE", ISACTIVE)
+									new SqlParameter("@ISACTIVE", ISACTIVE)    ,
+									new SqlParameter("@TOPNUMBER", TOPNUMBER)
 			};
 			return _dbEntityManager.ListParam<TBL_USERS>(sp_LIST, Param);
 		}
 
-		public static TBL_USERS SINGLE( string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null)
+		public static TBL_USERS SINGLE(int? ID = null, string EMAIL = null, string PASSWORD = null, bool? ISEXECUTIVE = null)
 		{
-			var result = LIST(EMAIL: EMAIL, PASSWORD: PASSWORD, ISEXECUTIVE: ISEXECUTIVE,ISACTIVE:true);
+			var result = LIST(ID: ID,EMAIL: EMAIL, PASSWORD: PASSWORD, ISEXECUTIVE: ISEXECUTIVE,ISACTIVE:true, TOPNUMBER: null);
 			if (result == null || result.Count == 0)
 				return null;
 			else

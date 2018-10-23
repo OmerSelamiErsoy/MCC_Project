@@ -4,30 +4,30 @@
 @*Common klasörünün içerisinde "OSECodeControl" altında kendi kontrolümüzü bir başka şekilde ekledik*@
 
 
-@helper myButton(string id = "", string type = "submit", string text = "", Enumeration.myButtonType color = Enumeration.myButtonType.PRIMARY, string additionalClass = "", string icon = "")
+@helper myButton(string id = "", string type = "submit", string text = "", Enumeration.enum_myButtonType color = Enumeration.enum_myButtonType.PRIMARY, string additionalClass = "", string icon = "")
 {
 	string ColorText = "primary";
 	switch (color)
 	{
-		case Enumeration.myButtonType.PRIMARY:
+		case Enumeration.enum_myButtonType.PRIMARY:
 			ColorText = "primary";
 			break;
-		case Enumeration.myButtonType.DANGER:
+		case Enumeration.enum_myButtonType.DANGER:
 			ColorText = "danger";
 			break;
-		case Enumeration.myButtonType.DEFAULT:
+		case Enumeration.enum_myButtonType.DEFAULT:
 			ColorText = "default";
 			break;
-		case Enumeration.myButtonType.INFO:
+		case Enumeration.enum_myButtonType.INFO:
 			ColorText = "info";
 			break;
-		case Enumeration.myButtonType.SECONDARY:
+		case Enumeration.enum_myButtonType.SECONDARY:
 			ColorText = "secondary";
 			break;
-		case Enumeration.myButtonType.SUCCESS:
+		case Enumeration.enum_myButtonType.SUCCESS:
 			ColorText = "success";
 			break;
-		case Enumeration.myButtonType.WARNING:
+		case Enumeration.enum_myButtonType.WARNING:
 			ColorText = "warning";
 			break;
 	}

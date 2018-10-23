@@ -1,0 +1,116 @@
+﻿@using Utility.Methods
+@model AdminPanel.Models.User.UserViewModel
+@{
+	ViewBag.Title = "Yönetici Listesi";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+	<div class="col">
+		<div class="card shadow">
+			<div class="row align-items-center padding-10">
+				<div class="col-8">
+					<h3 class="mb-0">Yönetici Listesi</h3>
+				</div>
+				<div class="col-4 text-right">
+					 
+				</div>
+			</div>
+			<div>
+				@if (Model.List_USERS.Count > 0)
+				{
+
+
+
+					<div class="table-responsive">
+
+						<table class="table align-items-center table-flush">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Kullanıcı Adı</th>
+									<th scope="col" class="text-center">Email</th>
+									<th scope="col" class="text-center">Telefon</th> 
+									<th scope="col" class="text-center">Durumu</th>
+									<th scope="col" class="text-center">Ekleyen</th>
+									<th scope="col" class="text-center">Eklenme Tarihi</th>
+									<th scope="col" class="text-center"></th>
+								</tr>
+							</thead>
+							<tbody>
+
+								@for (int i = 0; i < Model.List_USERS.Count(); i++)
+								{
+									<tr id="tr_@Model.List_USERS[i].ID">
+										<th scope="row">
+											<span class="mb-0 text-sm" id="FULLNAME_@Model.List_USERS[i].ID">@Model.List_USERS[i].FULLNAME</span>
+
+										</th>
+										<td class="text-center">
+											@Model.List_USERS[i].EMAIL
+										</td>
+										<td class="text-center">
+											@Model.List_USERS[i].PHONE
+										</td> 
+										<td class="text-center">
+
+											@if (Model.List_USERS[i].ISACTIVE)
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-success"></i> Aktif
+												</span>
+											}
+											else
+											{
+												<span class="badge badge-dot mr-4">
+													<i class="bg-warning"></i> Pasif
+												</span>
+											}
+
+											<input type="hidden" id="ISACTIVE_@Model.List_USERS[i].ID" value="@Model.List_USERS[i].ISACTIVE" />
+										</td>
+										<td class="text-center">
+											@Model.List_USERS[i].CREATEUSERNAME
+										</td>
+										<td class="text-center">
+											@String.Format("{0:dd/MM/yyyy}", Model.List_USERS[i].CREATEDATE)
+										</td>
+										<td class="text-right">
+											<button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='/AdminAuthority/PageObjectList/@Model.List_USERS[i].ID'">YETKİ DÜZENLE</button>
+											 
+										</td>
+									</tr>
+								}
+
+
+							</tbody>
+						</table>
+
+					</div>
+					 
+
+
+
+				}
+				else
+				{
+					<div class="alert alert-default m-l-10 m-r-10 m-t-10 m-b-20" role="alert">
+						<strong>Dikkat!</strong> Sistemde tanımlı herhangi bir yönetici bulunmuyor! Lütfen Ekleyiniz.
+					</div>
+				}
+
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+@section FooterBottom
+	{
+
+
+	 
+
+}
+

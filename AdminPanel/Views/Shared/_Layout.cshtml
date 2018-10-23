@@ -11,19 +11,20 @@
 	<meta name="author" content="Creative Tim">
 	<title>@ViewBag.Title</title>
 	<!-- Favicon -->
-	<link href="@ConfigManager.AdminDirectory/theme/assets/img/brand/favicon.png" rel="icon" type="image/png">
+	<link href="/theme/assets/img/brand/favicon.png" rel="icon" type="image/png">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<!-- Icons -->
-	<link href="@ConfigManager.AdminDirectory/theme/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+	<link href="/theme/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 
-	<link href="@ConfigManager.AdminDirectory/theme/assets/vendor/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-	<link type="text/css" href="@ConfigManager.AdminDirectory/theme/assets/css/argon.css?v=1.0.0" rel="stylesheet">
-	<link href="@ConfigManager.AdminDirectory/DesingComponent/CustomCSS.css" rel="stylesheet">
-	<link href="@ConfigManager.AdminDirectory/DesingComponent/customConfirm/jquery-confirm.css" rel="stylesheet">
+	<link href="/theme/assets/vendor/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link type="text/css" href="/theme/assets/css/argon.css?v=1.0.0" rel="stylesheet">
+	<link href="/DesingComponent/CustomCSS.css" rel="stylesheet">
+	<link href="/DesingComponent/customConfirm/jquery-confirm.css" rel="stylesheet">
 </head>
 <body>
-	<!-- Sidenav -->
+
+
 	<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
 		<div class="container-fluid">
 			<!-- Toggler -->
@@ -32,16 +33,16 @@
 			</button>
 			<!-- Brand -->
 			<a class="navbar-brand pt-0" href="/Home/index">
-				<img src="@ConfigManager.AdminDirectory/theme/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+				<img src="/theme/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
 			</a>
-			<!-- User -->
+
 			<ul class="nav align-items-center d-md-none">
 
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<div class="media align-items-center">
 							<span class="avatar avatar-sm rounded-circle">
-								<img alt="Image placeholder" src="@ConfigManager.AdminDirectory/theme/assets/img/theme/sketch.jpg">
+								<img alt="Image placeholder" src="/theme/assets/img/theme/sketch.jpg">
 							</span>
 						</div>
 					</a>
@@ -53,18 +54,7 @@
 							<i class="ni ni-single-02"></i>
 							<span>profilim</span>
 						</a>
-						@*<a href="./examples/profile.html" class="dropdown-item">
-								<i class="ni ni-settings-gear-65"></i>
-								<span>Settings</span>
-							</a>
-							<a href="./examples/profile.html" class="dropdown-item">
-								<i class="ni ni-calendar-grid-58"></i>
-								<span>Activity</span>
-							</a>
-							<a href="./examples/profile.html" class="dropdown-item">
-								<i class="ni ni-support-16"></i>
-								<span>Support</span>
-							</a>*@
+						 
 						<div class="dropdown-divider"></div>
 						<a href="/Authority/Logout" class="dropdown-item">
 							<i class="ni ni-user-run"></i>
@@ -73,14 +63,13 @@
 					</div>
 				</li>
 			</ul>
-			<!-- Collapse -->
 			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
-				<!-- Collapse header -->
+
 				<div class="navbar-collapse-header d-md-none">
 					<div class="row">
 						<div class="col-6 collapse-brand">
 							<a href="/Home/index">
-								<img src="@ConfigManager.AdminDirectory/theme/assets/img/brand/blue.png" border="0">
+								<img src="/theme/assets/img/brand/blue.png" border="0">
 							</a>
 						</div>
 						<div class="col-6 collapse-close">
@@ -91,40 +80,55 @@
 						</div>
 					</div>
 				</div>
-				<!-- Form -->
-				<!-- Navigation -->
+
+
 				<ul class="navbar-nav">
 					<li class="nav-item">
 						<a class="nav-link" href="/Home/index">
 							<i class="ni ni-tv-2 text-primary"></i> Dashboard
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/Category/CategoryList">
-							<i class="ni ni-ungroup text-warning"></i> Kategori Listesi
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/Product/ProductList">
-							<i class="ni ni-bullet-list-67 text-red"></i> Ürün Listesi
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/User/UserList">
-							<i class="ni ni-circle-08 text-blue"></i> Kullanıcı Listesi
-						</a>
-					</li>
-					@*<li class="nav-item">
-						<a class="nav-link" href="#">
-							<i class="ni ni-key-25 text-info"></i> Yetki İşlemleri
-						</a>
-					</li>*@
+					@if (FilterAuthorization.PageControl(Enumeration.enum_PageID.CategoryPage))
+					{
+						<li class="nav-item">
+							<a class="nav-link" href="/Category/CategoryList">
+								<i class="ni ni-ungroup text-warning"></i> Kategori Listesi
+							</a>
+						</li>
+					}
+					@if (FilterAuthorization.PageControl(Enumeration.enum_PageID.ProductPage))
+					{
+						<li class="nav-item">
+							<a class="nav-link" href="/Product/ProductList">
+								<i class="ni ni-bullet-list-67 text-red"></i> Ürün Listesi
+							</a>
+						</li>
+					}
+
+					@if (FilterAuthorization.PageControl(Enumeration.enum_PageID.UserPage))
+					{
+						<li class="nav-item">
+							<a class="nav-link" href="/User/UserList">
+								<i class="ni ni-circle-08 text-blue"></i> Kullanıcı Listesi
+							</a>
+						</li>
+					}
+					@if (FilterAuthorization.PageControl(Enumeration.enum_PageID.UserBlockPage))
+					{
+						<li class="nav-item">
+							<a class="nav-link" href="/AdminAuthority/AdminList">
+								<i class="ni ni-key-25 text-info"></i> Yetki İşlemleri
+							</a>
+						</li>
+					}
+
+
 				</ul>
-				<!-- Divider -->
-				<!-- Divider -->
+
+
 				<hr class="my-3">
-				<!-- Heading -->
-				<!-- Navigation -->
+
+
 				<ul class="navbar-nav mb-md-3">
 					<li class="nav-item">
 						<a class="nav-link" href="/Authority/Logout">
@@ -135,21 +139,23 @@
 			</div>
 		</div>
 	</nav>
-	<!-- Main content -->
+
+
+
 	<div class="main-content">
-		<!-- Top navbar -->
+
 		<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 			<div class="container-fluid">
-				<!-- Brand -->
+
 				<a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/Home/index">Dashboard</a>
-				<!-- Form -->
-				<!-- User -->
+
+
 				<ul class="navbar-nav align-items-center d-none d-md-flex">
 					<li class="nav-item dropdown">
 						<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="media align-items-center">
 								<span class="avatar avatar-sm rounded-circle">
-									<img alt="Image placeholder" src="@ConfigManager.AdminDirectory/theme/assets/img/theme/sketch.jpg">
+									<img alt="Image placeholder" src="/theme/assets/img/theme/sketch.jpg">
 								</span>
 								<div class="media-body ml-2 d-none d-lg-block">
 									<span class="mb-0 text-sm  font-weight-bold">@BasePage.LoginUserInf.FULLNAME</span>
@@ -164,52 +170,41 @@
 								<i class="ni ni-single-02"></i>
 								<span>profilim</span>
 							</a>
-							@*<a href="./examples/profile.html" class="dropdown-item">
-									<i class="ni ni-settings-gear-65"></i>
-									<span>Settings</span>
-								</a>
-								<a href="./examples/profile.html" class="dropdown-item">
-									<i class="ni ni-calendar-grid-58"></i>
-									<span>Activity</span>
-								</a>
-								<a href="./examples/profile.html" class="dropdown-item">
-									<i class="ni ni-support-16"></i>
-									<span>Support</span>
-								</a>*@
 							<div class="dropdown-divider"></div>
 							<a href="/Authority/Logout" class="dropdown-item">
 								<i class="ni ni-user-run"></i>
-								<span>Logout</span>
+								<span>Çıkış</span>
 							</a>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</nav>
-		<!-- Header -->
+
 		<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 			<div class="container-fluid">
 				<div class="header-body">
-					<!-- Card stats -->
-					
+
+
 				</div>
 			</div>
 		</div>
-		<!-- Page content -->
+
 		<div class="container-fluid mt--9">
+
 			@RenderBody()
-			<!-- Footer -->
+
 
 		</div>
 	</div>
 
-	<script src="@ConfigManager.AdminDirectory/theme/assets/vendor/jquery/dist/jquery.min.js"></script>
-	<script src="@ConfigManager.AdminDirectory/theme/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="@ConfigManager.AdminDirectory/theme/assets/vendor/chart.js/dist/Chart.min.js"></script>
-	<script src="@ConfigManager.AdminDirectory/theme/assets/vendor/chart.js/dist/Chart.extension.js"></script>
-	<script src="@ConfigManager.AdminDirectory/theme/assets/js/argon.js?v=1.0.0"></script>
-	<script src="@ConfigManager.AdminDirectory/DesingComponent/customConfirm/jquery-confirm.js"></script>
-	<script src="@ConfigManager.AdminDirectory/DesingComponent/CustomJS.js"></script>
+	<script src="/theme/assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="/theme/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/theme/assets/vendor/chart.js/dist/Chart.min.js"></script>
+	<script src="/theme/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+	<script src="/theme/assets/js/argon.js?v=1.0.0"></script>
+	<script src="/DesingComponent/customConfirm/jquery-confirm.js"></script>
+	<script src="/DesingComponent/CustomJS.js"></script>
 
 
 

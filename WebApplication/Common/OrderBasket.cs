@@ -46,7 +46,7 @@ namespace WebApplication.Common
 			}
 		}
 
-		public static void AddOrUpdate(int productID, int AMOUNT)
+		public static void AddOrUpdate(int productID, int AMOUNT, int ISEQUAL = 0)
 		{
 			if (AMOUNT > 0 && productID > 0)
 			{
@@ -56,7 +56,11 @@ namespace WebApplication.Common
 
 					if (Control(productID))
 					{
-						BL.BasketList.Where(x => x.PRODUCT.ID == productID).ToList()[0].AMOUNT += AMOUNT;
+						if (ISEQUAL.ToBoolean())  // Eşitler
+							BL.BasketList.Where(x => x.PRODUCT.ID == productID).ToList()[0].AMOUNT = AMOUNT;
+						else // Üstüne Ekler
+							BL.BasketList.Where(x => x.PRODUCT.ID == productID).ToList()[0].AMOUNT += AMOUNT;
+
 						myBasket = BL;
 					}
 					else
@@ -84,7 +88,7 @@ namespace WebApplication.Common
 						BM.AMOUNT = AMOUNT;
 
 						BasketModelList BL = new BasketModelList();
-						BL.BasketList.Add(BM);
+						BL.BasketList = new List<BasketModel>() { BM };
 						myBasket = BL;
 					}
 
@@ -95,6 +99,7 @@ namespace WebApplication.Common
 
 	}
 
+	[Serializable]
 	public class BasketModelList
 	{
 		public List<BasketModel> BasketList { get; set; }
@@ -103,6 +108,7 @@ namespace WebApplication.Common
 		public double TOTALPRICE { get { return BasketList.Sum(x => x.TOTALPRICE); } }
 	}
 
+	[Serializable]
 	public class BasketModel
 	{
 		public TBL_PRODUCTS PRODUCT { get; set; }

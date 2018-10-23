@@ -1,0 +1,14 @@
+﻿@using WebApplication.Common
+
+<a href="/Basket/BasketList" class="dropdown-toggle" data-toggle="dropdown">
+	<span class="lnr lnr-cart"></span> 
+
+	@if (OrderBasket.myBasket != null && OrderBasket.myBasket.TOTALAOMUNT > 0)
+	{
+		<span class="badge badge-bg-1" id="spnBasketAmount">@OrderBasket.myBasket.TOTALAOMUNT </span>
+	}
+	else
+	{
+		<span class="badge badge-bg-1" style="display:none;" id="spnBasketAmount">0</span>
+	}
+</a>

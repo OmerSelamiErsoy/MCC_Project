@@ -47,7 +47,7 @@
 	border-color: #17a2b8 !important;
 }
 
-
+ 
 .text-master {
   color: #626262 !important;
 }
@@ -96,19 +96,88 @@
 	border-radius: .25rem;
 }
 
+.fs-12 {font-size: 12px !important;}
+.fs-14 {font-size: 14px !important;}
+.fs-16 {font-size: 16px !important;}
+.fs-18 {font-size: 18px !important;}
+.fs-20 {font-size: 20px !important;}
+.fs-25 {font-size: 25px !important;}
+.fs-30 {font-size: 30px !important;} 
 
+.h-25 {
+	height: 25px !important;
+}
+.h-50 {
+	height: 50px !important;
+}
 .h-75 {
-	height:75px !important;
+	height: 75px !important;
+}
+.h-100 {
+	height: 100px !important;
+}
+.h-125 {
+	height: 125px !important;
+}
+.h-150 {
+	height: 150px !important;
+}
+.h-175 {
+	height: 175px !important;
+}
+.h-200 {
+	height: 200px !important;
+}
+.h-225 {
+	height: 225px !important;
+}
+.h-250 {
+	height: 250px !important;
 }
 
-.w-200
-{
-width:200px !important;
+
+
+.w-25 {
+	width: 25px !important;
 }
-.w-150
-{
-width:150px !important;
+
+.w-50 {
+	width: 50px !important;
 }
+
+.w-75 {
+	width: 75px !important;
+}
+
+.w-100 {
+	width: 100px !important;
+}
+
+.w-125 {
+	width: 125px !important;
+}
+
+.w-150 {
+	width: 150px !important;
+}
+
+.w-175 {
+	width: 175px !important;
+}
+
+.w-200 {
+	width: 200px !important;
+}
+
+.w-225 {
+	width: 225px !important;
+}
+
+.w-250 {
+	width: 250px !important;
+}
+
+ 
 
 .pull-right {
 	float:right !important;
@@ -310,40 +379,40 @@ width:150px !important;
 ------------------------------------
  */
 .m-t-0 {
-  margin-top: 0px;
+	margin-top: 0px !important;
 }
 .m-r-0 {
-  margin-right: 0px;
+	margin-right: 0px !important;
 }
 .m-l-0 {
-  margin-left: 0px;
+	margin-left: 0px !important;
 }
 .m-b-0 {
-  margin-bottom: 0px;
+	margin-bottom: 0px !important;
 }
 .m-t-5 {
-  margin-top: 5px;
+	margin-top: 5px !important;
 }
 .m-r-5 {
-  margin-right: 5px;
+	margin-right: 5px !important;
 }
 .m-l-5 {
-  margin-left: 5px;
+	margin-left: 5px !important;
 }
 .m-b-5 {
-  margin-bottom: 5px;
+	margin-bottom: 5px !important;
 }
 .m-t-10 {
-  margin-top: 10px;
+	margin-top: 10px !important;
 }
 .m-r-10 {
-  margin-right: 10px;
+	margin-right: 10px !important;
 }
 .m-l-10 {
-  margin-left: 10px;
+	margin-left: 10px !important;
 }
 .m-b-10 {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 .m-t-15 {
   margin-top: 15px;

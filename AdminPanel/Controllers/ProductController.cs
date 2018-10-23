@@ -1,6 +1,7 @@
 ﻿using AdminPanel.Common;
 using AdminPanel.Models.General;
 using AdminPanel.Models.Product;
+using Log_Layer.Manager;
 using Object_Layer;
 using System;
 using System.Web;
@@ -12,13 +13,46 @@ namespace AdminPanel.Controllers
 {
 	public class ProductController : Controller
     {
+		 
 
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.ProductPage), LogAction]
 		public ActionResult ProductList()
 		{
 			ProductViewModel Model = new ProductViewModel();	   
 			Model.List_PRODUCTS = TBL_PRODUCTS.LIST();
+			Model.List_CATEGORIES = TBL_CATEGORIES.LIST().ConvertAll(t =>
+			{
+				return new SelectListItem()
+				{
+					Text = t.CATEGORYNAME.ToString(),
+					Value = t.ID.ToString(),
+					Selected = false
+				};
+			});
+			return View(Model);
+		}
 
+
+		[HttpPost]
+		[FilterAuthorization(Enumeration.enum_PageID.ProductPage)]
+		public ActionResult ProductList(string PRODUCTNAME = null,int CATEGORYID = -1)
+		{
+			ProductViewModel Model = new ProductViewModel();
+			int? _categoryID = null;
+			if (CATEGORYID > 0)
+				_categoryID = CATEGORYID;
+			Model.List_PRODUCTS = TBL_PRODUCTS.LIST(PRODUCTNAME: PRODUCTNAME, CATEGORYID: _categoryID);
+			Model.List_CATEGORIES = TBL_CATEGORIES.LIST().ConvertAll(t =>
+			{
+				return new SelectListItem()
+				{
+					Text = t.CATEGORYNAME.ToString(),
+					Value = t.ID.ToString(),
+					Selected = false
+				};
+			});
+			Model.CATEGORYID = CATEGORYID;
+			Model.PRODUCTNAME = PRODUCTNAME;
 			return View(Model);
 		}
 
@@ -31,6 +65,8 @@ namespace AdminPanel.Controllers
 				TBL_PRODUCTS.DELETE(ID);
 				I.ISSUCCESSFUL = true;
 
+				//Ürün fizikiolarak silinmediği için ID üzerinden ürüne ulaşabiliriz.
+				LogManager.LogManagerStatic().LogInfo(ID+ "IDli ürün "+BasePage.LoginUserInf.FULLNAME+ " kullanıcısı tarafından silindi.");
 			}
 			catch (Exception ex)
 			{
@@ -44,7 +80,7 @@ namespace AdminPanel.Controllers
 
 
 
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.ProductPage), LogAction]
 		public ActionResult ProductDetail(int ID = 0)
 		{
 			ProductViewModel Model = new ProductViewModel();
@@ -67,7 +103,7 @@ namespace AdminPanel.Controllers
 		}
 
 
-		[FilterAuthorization]
+		[FilterAuthorization, LogAction]
 		public ActionResult ProductInsertOrUpdate(int ID = 0)
 		{
 			InsertViewModel Model = new InsertViewModel();
@@ -98,6 +134,9 @@ namespace AdminPanel.Controllers
 					Model.TAX = T.TAX;
 					Model.ID = ID;
 					Model.ISINSERT = false;
+
+
+					 
 				}
 				catch (Exception ex)
 				{
@@ -122,7 +161,7 @@ namespace AdminPanel.Controllers
 
 
 		[HttpPost]
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.ProductPage)]
 		public ActionResult ProductInsertOrUpdate(InsertViewModel Model, HttpPostedFileBase inputImage = null)
 		{
 
@@ -186,6 +225,9 @@ namespace AdminPanel.Controllers
 
 				Model.ISINSERT = false;
 				Model.MESSAGE = Model.PRODUCTNAME + " Ürünü başarı ile güncellenmiştir. Altta bulunan 'Listeye Dön' linkine tıklayarak ürün listesine ulaşabilirsiniz.";
+
+
+				LogManager.LogManagerStatic().LogInfo(Model.ID + "IDli ürün " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından güncellendi.");
 			}
 			else
 			{
@@ -206,6 +248,9 @@ namespace AdminPanel.Controllers
 
 				Model.ISINSERT = true;
 				Model.MESSAGE = Model.PRODUCTNAME + " Ürünü başarı ile eklenmiştir. Altta bulunan 'Listeye Dön' linkine tıklayarak ürün listesine ulaşabilirsiniz";
+
+
+				LogManager.LogManagerStatic().LogInfo(Model.PRODUCTNAME + "isim ürün " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından eklendi.");
 
 
 				Model.CATEGORYID = -1;

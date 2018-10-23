@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesingComponent\pageJS\AdminAuthority.js" />
     <Content Include="DesingComponent\pageJS\Category.js" />
     <Content Include="DesingComponent\pageJS\Product.js" />
     <Content Include="DesingComponent\pageJS\User.js" />
@@ -1801,16 +1802,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\BasePage.cs" />
     <Compile Include="Common\FilterAuthorization.cs" />
+    <Compile Include="Common\LogAction.cs" />
     <Compile Include="Common\OSECodeControl.cs" />
     <Compile Include="Controllers\AuthorityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\AdminAuthorityController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abstract\IObjectState.cs" />
     <Compile Include="Models\Abstract\IResultState.cs" />
+    <Compile Include="Models\AdminAuthority\AdminAuthorityViewModel.cs" />
     <Compile Include="Models\General\TransactionStatus.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Login\LoginViewModel.cs" />
@@ -2050,6 +2055,9 @@
     <Content Include="Views\User\UserInsertOrUpdate.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\User\UserDetail.cshtml" />
+    <Content Include="Views\AdminAuthority\AdminList.cshtml" />
+    <Content Include="Views\AdminAuthority\PageObjectList.cshtml" />
+    <Content Include="Views\AdminAuthority\Unauthorized.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

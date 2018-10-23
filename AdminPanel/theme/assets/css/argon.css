@@ -20904,6 +20904,11 @@ textarea[resize='horizontal']
     background-color: #1c345d;
 }
 
+.table .thead-orange th {
+	color: #4d7bca;
+	background-color: #fff3d8;
+}
+
 .table .thead-light th
 {
     color: #8898aa; 

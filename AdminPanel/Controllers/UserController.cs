@@ -1,15 +1,17 @@
 ﻿using AdminPanel.Common;
 using AdminPanel.Models.General;
 using AdminPanel.Models.User;
+using Log_Layer.Manager;
 using Object_Layer;
 using System;
 using System.Web.Mvc;
+using Utility.Methods;
 
 namespace AdminPanel.Controllers
 {
 	public class UserController : Controller
     {
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.UserPage), LogAction]
 		public ActionResult UserList()
 		{
 			UserViewModel Model = new UserViewModel();
@@ -20,7 +22,7 @@ namespace AdminPanel.Controllers
 
 
 
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.UserPage), LogAction]
 		public ActionResult UserDetail(int ID = 0)
 		{
 			UserViewModel Model = new UserViewModel();
@@ -49,6 +51,8 @@ namespace AdminPanel.Controllers
 				TBL_USERS.DELETE(ID);
 				I.ISSUCCESSFUL = true;
 
+				//kullanıcı fizikiolarak silinmediği için ID üzerinden db'den ulaşabiliriz.
+				LogManager.LogManagerStatic().LogInfo(ID + "IDli kullanıcı " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından silindi.");
 			}
 			catch (Exception ex)
 			{
@@ -61,7 +65,7 @@ namespace AdminPanel.Controllers
 
 
 
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.UserPage), LogAction]
 		public ActionResult UserInsertOrUpdate(int ID = 0)
 		{
 			InsertViewModel Model = new InsertViewModel();
@@ -107,7 +111,7 @@ namespace AdminPanel.Controllers
 
 
 		[HttpPost]
-		[FilterAuthorization]
+		[FilterAuthorization(Enumeration.enum_PageID.UserPage)]
 		public ActionResult UserInsertOrUpdate(InsertViewModel Model)
 		{
 
@@ -131,6 +135,8 @@ namespace AdminPanel.Controllers
 
 				Model.ISINSERT = false;
 				Model.MESSAGE = Model.FULLNAME + " kişisi başarı ile güncellenmiştir. Altta bulunan 'Listeye Dön' linkine tıklayarak Kullanıcı listesine ulaşabilirsiniz.";
+
+				LogManager.LogManagerStatic().LogInfo(Model.FULLNAME + "isimli kullanıcı " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından güncellendi.");
 			}
 			else
 			{
@@ -149,6 +155,8 @@ namespace AdminPanel.Controllers
 
 				Model.ISINSERT = true;
 				Model.MESSAGE = Model.FULLNAME + " kişisi başarı ile eklenmiştir. Altta bulunan 'Listeye Dön' linkine tıklayarak Kullanıcı listesine ulaşabilirsiniz";
+
+				LogManager.LogManagerStatic().LogInfo(Model.FULLNAME + "isimli kullanıcı " + BasePage.LoginUserInf.FULLNAME + " kullanıcısı tarafından eklendi.");
 
 
 				Model.EMAIL = "";

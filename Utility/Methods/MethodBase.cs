@@ -191,6 +191,38 @@ namespace Utility.Methods
 				return 0;
 			}
 		}
+
+		public static bool ToBoolean(this object str)
+		{
+			if (str == null || string.IsNullOrEmpty(str.ToString()))
+				return false;
+
+			try
+			{
+				try
+				{
+					return Convert.ToBoolean(Convert.ToInt32(str));
+				}
+				catch
+				{
+
+					if (str.ToString() == "True")
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public static string CreateUniqPassword(int StepCount = 6)
 		{
 			int iMinCount = 0, iMaxCount = 0;

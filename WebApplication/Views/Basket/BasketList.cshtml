@@ -1,0 +1,138 @@
+﻿@using Utility.Methods
+@model WebApplication.Models.Basket.BasketViewModel
+@{
+	ViewBag.Title = "Sepetim";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section id="new-arrivals" class="new-arrivals ">
+	<div class="container m-t-20 p-l-0 p-r-0">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Sepetim</li>
+			</ol>
+		</nav>
+		@*<div class="section-header">
+				<h2>new arrivals</h2>
+			</div>*@
+		<!--/.section-header-->
+		<div class="new-arrivals-content m-t-20">
+			<div class="row">
+
+				<div class="col-md-12 col-sm-12">
+					<div class="row">
+
+						<div class="col-md-12">
+							@if (Model.BASKET == null || Model.BASKET.BasketList == null || Model.BASKET.BasketList.Count() == 0)
+							{
+								<div class="alert alert-warning p-b-20" role="alert">
+									<h6 class="m-t-20 m-b-10">Üzgünüz!</h6>
+									Sepetinizde herhangi bir ürün bulunmuyor.
+								</div>
+							}
+							else
+							{
+
+								using (Html.BeginForm("BasketList", "Basket", FormMethod.Post, new { id = "formBasket" }))
+								{
+
+									<input type="hidden" name="postPROCESS" id="postPROCESS" value="0" />
+									<input type="hidden" name="postID" id="postID" value="0" />
+									<input type="hidden" name="postAMOUNT" id="postAMOUNT" value="0" />
+
+								}
+
+								for (int i = 0; i < Model.BASKET.BasketList.Count(); i++)
+								{
+
+									<div class="single-populer-products" style="min-height: 175px !important;">
+										<div class="single-inner-populer-products m-t-10 m-b-10">
+											<div class="row">
+												<div class="col-md-3 col-sm-12">
+													<div class="single-inner-populer-product-img text-center">
+														<img src="@Model.BASKET.BasketList[i].PRODUCT.PHOTODISPLAY" style="height: 150px !important;" alt="populer-products images h-150">
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="single-inner-populer-product-txt">
+														<h2>
+															<a href="/Product/ProductDetail/@Model.BASKET.BasketList[i].PRODUCT.ID">
+																@Model.BASKET.BasketList[i].PRODUCT.PRODUCTNAME
+															</a>
+														</h2>
+
+														<div class="populer-products-price m-t-20">
+															<h4>Birim satış fiyatı (KDV Dahil): <span> @String.Format("{0:0,0.00}", Model.BASKET.BasketList[i].PRODUCT.PRICE) ₺</span></h4>
+														</div>
+														<p class="fs-20 m-t-5 m-b-5">
+															@Model.BASKET.BasketList[i].AMOUNT X @String.Format("{0:0,0.00}", Model.BASKET.BasketList[i].PRODUCT.PRICE) =  @String.Format("{0:0,0.00}", Model.BASKET.BasketList[i].TOTALPRICE) ₺
+														</p>
+														<p class="fs-20 m-t-5">
+
+															<button type="button" class="btn btn-danger btn-sm m-t-0 p-b-5 " onclick="DeleteBasket(@Model.BASKET.BasketList[i].PRODUCT.ID)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Kaldır</button>
+														</p>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-12 text-right">
+
+
+
+													<p class="col-md-12">
+														<input type="text" class="form-control numberinput w-125 m-t-20 text-center pull-right" name="postAMOUNT" id="BasketAmount_@Model.BASKET.BasketList[i].PRODUCT.ID" placeholder="Adet" value="@Model.BASKET.BasketList[i].AMOUNT" onkeypress="inputEnterBtn(event,'btnAddBasket_@Model.BASKET.BasketList[i].PRODUCT.ID')" onkeydown="inputEnterBtn(event,'btnAddBasket_@Model.BASKET.BasketList[i].PRODUCT.ID')">
+
+													</p>
+													<p class="col-md-12">
+														<button class="btn-cart welcome-add-cart populer-products-btn" onclick="AddBasket(@Model.BASKET.BasketList[i].PRODUCT.ID)" id="btnAddBasket_@Model.BASKET.BasketList[i].PRODUCT.ID">
+															GÜNCELLE
+														</button>
+													</p>
+
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<br />
+								}
+
+								<hr />
+								<div class="col-md-4 col-sm-12 text-left">
+									<button type="button" class="btn btn-danger btn-sm m-t-0 p-b-5 " onclick="ClearBasket()"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Sepeti Boşalt</button>
+								</div>
+								<div class="col-md-8 col-sm-12 text-right">
+									<div class="populer-products-price m-t-0">
+										<h2>TOPLAM TUTAR:</h2>
+									</div>
+									<div class="populer-products-price m-t-10">
+										<h2 class="text-danger"><span>@String.Format("{0:0,0.00}", Model.BASKET.TOTALPRICE) ₺</span></h2>
+									</div>
+								</div>
+							}
+
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div><!--/.container-->
+
+</section>
+
+
+
+@section FooterBottom
+	{
+
+<script src="/DesingComponent/pageJS/Basket.js"></script>
+	 
+
+}
