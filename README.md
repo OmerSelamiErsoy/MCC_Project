@@ -1,7 +1,7 @@
 # MCC_Project
 İçerisinde Yönetici ve kullanıcı ekranları barındıran ufak çaplı e-ticaret sitesi.
 
--Teknoloji ve Mimariler-
+## -Teknoloji ve Mimariler-
 OOP N-tier,
 AOP, 
 IOC Container (Ninject),
@@ -17,21 +17,21 @@ Json,
 XML,
 Bootstrap
 
--İşlem Kategorileri-
-  Yönetici Ekranı:
+### -İşlem Kategorileri-
+####  Yönetici Ekranı:
 - Kategori     (ekle/güncelle/sil) 
 - Ürün         (ekle/güncelle/sil)
 - Kullanıcılar (ekle/güncelle/sil)
 - Yetkilendirme 
 - Login 
- Kullanıcı Ekranı:
+ #### Kullanıcı Ekranı:
 - Anasayfa
 - Ürün listele 
 - Ürün detay
 - Sepete ekle
 - Sepet listele (güncelle/sil/temizle)
 
-Projeyi ayağa kaldırmak için lütfen aşağıdaki adımları uygulayınız.
+#### Projeyi ayağa kaldırmak için lütfen aşağıdaki adımları uygulayınız.
 1) DB_Script projesi içindeki MSSQL backup dosyasını kurunuz.
 2) Utility > Data > Settings.xml içerisindeki "Connnection_DB" fileld'ına güncel connection string bilginizi giriniz.
 3) Aşağıda belirtilen config dosyalarına projelerin genel config dosyası olan "Utility > Data > Settings.xml"'i görebilmesi için,
